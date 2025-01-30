@@ -1,0 +1,6 @@
+
+backend/spread_auth/__pycache__/
+
+.idea/
+
+*.pyc

@@ -1,0 +1,24 @@
+name: awada
+services:
+  ${SERVICE_NAME}:
+    image: alpha.awada.systems/${IMAGE_NAME}:${VERSION}
+    container_name: ${SERVICE_NAME}
+    hostname: ${SERVICE_NAME}
+    volumes:
+      - project:/var/project/
+      - awada:/opt/awada
+      - spread-conf:/etc/spread/
+      - awada-sockets:/opt/awada-sockets/
+      - awada-snippets:/etc/nginx/snippets/
+    restart: unless-stopped
+volumes:
+  project:
+    name: project
+  awada:
+    name: awada
+  spread-conf:
+    name: spread-conf
+  awada-sockets:
+    name: awada-sockets
+  awada-snippets:
+    name: awada-snippets

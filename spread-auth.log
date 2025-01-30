@@ -1,0 +1,116 @@
+2025-01-15 14:05:10,326 [core.db                            .init_db        :(  25)] INFO - init_db auth
+2025-01-15 14:05:10,326 [core.db                            .init_db        :(  31)] ERROR - Expected string or URL object, got MultiHostUrl('postgresql+asyncpg://postgres:postgres@localhost:5432/auth')
+Traceback (most recent call last):
+  File "/home/egor/Repository/spread-auth-fa/backend/spread_auth/core/db.py", line 27, in init_db
+    sync_engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in create_engine
+  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib64/python3.11/site-packages/sqlalchemy/util/deprecations.py", line 281, in warned
+    return fn(*args, **kwargs)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib64/python3.11/site-packages/sqlalchemy/engine/create.py", line 549, in create_engine
+    u = _url.make_url(url)
+        ^^^^^^^^^^^^^^^^^^
+  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib64/python3.11/site-packages/sqlalchemy/engine/url.py", line 860, in make_url
+    raise exc.ArgumentError(
+sqlalchemy.exc.ArgumentError: Expected string or URL object, got MultiHostUrl('postgresql+asyncpg://postgres:postgres@localhost:5432/auth')
+2025-01-16 11:09:41,463 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 11:10:06,520 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 11:13:48,489 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 11:14:18,313 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 11:14:38,565 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 11:55:17,361 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 11:56:05,329 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 11:56:07,981 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-16 11:56:11,754 [core.db                            .init_db        :(  45)] INFO - init_db migrate end
+2025-01-16 13:05:34,869 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 13:05:38,961 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-16 13:06:07,245 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 13:06:07,365 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-16 14:06:54,365 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 14:06:54,453 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-16 15:08:41,770 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 15:08:41,858 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-16 15:11:27,534 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 15:11:27,649 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-16 15:14:37,891 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-16 15:14:37,974 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-21 13:16:18,404 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-21 13:16:18,541 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-21 13:16:37,722 [core.db                            .init_db        :(  48)] ERROR - Path doesn't exist: '/home/egor/Repository/spread-auth-fa/spread_auth/alembic'.  Please use the 'init' command to create a new scripts folder.
+Traceback (most recent call last):
+  File "/home/egor/Repository/spread-auth-fa/backend/spread_auth/core/db.py", line 43, in init_db
+    await connection.run_sync(run_upgrade, cfg)
+  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib64/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 887, in run_sync
+    return await greenlet_spawn(
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib64/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 190, in greenlet_spawn
+    result = context.switch(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/egor/Repository/spread-auth-fa/backend/spread_auth/core/db.py", line 26, in run_upgrade
+    command.upgrade(cfg, "head")
+  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib/python3.11/site-packages/alembic/command.py", line 386, in upgrade
+    script = ScriptDirectory.from_config(config)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib/python3.11/site-packages/alembic/script/base.py", line 229, in from_config
+    return ScriptDirectory(
+           ^^^^^^^^^^^^^^^^
+  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib/python3.11/site-packages/alembic/script/base.py", line 106, in __init__
+    raise util.CommandError(
+alembic.util.exc.CommandError: Path doesn't exist: '/home/egor/Repository/spread-auth-fa/spread_auth/alembic'.  Please use the 'init' command to create a new scripts folder.
+2025-01-21 13:18:02,189 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-21 13:18:02,325 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-21 15:29:14,543 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-21 15:29:14,698 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-21 16:30:18,939 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-21 16:30:19,051 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-22 11:06:17,686 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-22 11:06:17,828 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-22 13:59:35,325 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-22 13:59:35,438 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-22 14:01:46,675 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-22 14:01:46,788 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-23 11:08:32,031 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-23 11:08:32,178 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 11:27:51,693 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 11:27:51,832 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 11:43:07,662 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 11:43:07,759 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 11:43:31,361 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 11:43:31,481 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 11:44:52,956 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 11:44:53,073 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 11:45:15,320 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 11:45:15,418 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 11:49:16,423 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 11:49:16,536 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 11:56:55,589 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 11:56:55,721 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 14:51:58,403 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 14:51:58,559 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 14:54:36,057 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 14:54:36,167 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 14:55:39,373 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 14:55:39,512 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 14:55:58,065 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 14:55:58,198 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 14:56:22,448 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 14:56:22,572 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 14:57:56,620 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 14:57:56,746 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 14:58:12,529 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 14:58:12,644 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 14:58:28,086 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 14:58:28,203 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-24 14:58:55,290 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-24 14:58:55,407 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-27 11:14:21,326 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-27 11:14:21,431 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-27 14:52:26,028 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-27 14:52:26,135 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-27 16:09:52,692 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-27 16:09:52,821 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-27 16:11:01,662 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-27 16:11:01,788 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-01-27 16:12:18,347 [core.db                            .init_db        :(  30)] INFO - init_db auth
+2025-01-27 16:12:18,463 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
