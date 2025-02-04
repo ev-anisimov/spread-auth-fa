@@ -6,6 +6,7 @@
     <!-- Если пользователь авторизован -->
     <template v-else>
 
+      <NotificationBox  ref="notificationRef" />
       <div v-if="isHomePage" class="container mt-5">
         <RouterLink :to="{ name: 'users' }" class="btn btn-secondary btn-lg btn-block">
           Администрирование прав
@@ -31,13 +32,15 @@
 </template>
 
 <script setup>
-import {computed} from 'vue';
+import {computed,  ref, provide} from 'vue';
 import {useRoute} from 'vue-router';
 import {useAuthStore} from "@/stores/auth";
 
 import NavMenu from '@/components/Permission/NavMenu.vue';
 import UserInfo from "@/components/UserInfo.vue";
 import LoginView from "@/views/LoginView.vue";
+import NotificationBox from "@/components/NotificationBox.vue";
+
 
 // Доступ к текущему маршруту
 const route = useRoute();
@@ -45,6 +48,14 @@ const route = useRoute();
 const authStore = useAuthStore();
 // Проверка, является ли текущая страница домашней
 const isHomePage = computed(() => route.path === '/');
+
+
+// Создаем инстанс уведомлений
+// Ссылка на Notification
+const notificationRef = ref(null);
+provide("notify", (text, type, autoClose) => {
+  notificationRef.value?.addMessage(text, type, autoClose);
+});
 </script>
 
 <style scoped>

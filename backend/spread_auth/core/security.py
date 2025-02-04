@@ -7,7 +7,10 @@ from passlib.context import CryptContext
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from spread_auth.models import UserPublic, TokenData
+from sqlmodel import select
+
+from core.db import get_session
+from spread_auth.models import User, UserPublic, TokenData
 from spread_auth.core.config import settings
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -25,6 +28,7 @@ fake_users_db = {
     }
 }
 
+
 def create_access_token(data: dict, expires_delta: timedelta | None = None):
     to_encode = data.copy()
     if expires_delta:
@@ -37,7 +41,6 @@ def create_access_token(data: dict, expires_delta: timedelta | None = None):
     return encoded_jwt
 
 
-
 def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
@@ -46,22 +49,22 @@ def get_password_hash(password: str) -> str:
     return pwd_context.hash(password)
 
 
-def get_user(db, username: str):
-    if username in db:
-        user_dict = db[username]
-        return UserPublic(**user_dict)
+async def get_user_by_username(session, username: str):
+    user = await session.exec(select(User).where(User.username == username))
+
+    return user.first()
 
 
-def authenticate_user(fake_db, username: str, password: str):
-    user = get_user(fake_db or fake_users_db, username)
+async def authenticate_user(session, username: str, password: str):
+    user = await get_user_by_username(session, username)
     if not user:
         return False
-    if not verify_password(password, user.hashed_password):
+    if not verify_password(password, user.password):
         return False
     return user
 
 
-async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
+async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)], session=Depends(get_session)):
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
         detail="Could not validate credentials",
@@ -75,7 +78,7 @@ async def get_current_user(token: Annotated[str, Depends(oauth2_scheme)]):
         token_data = TokenData(username=username)
     except InvalidTokenError:
         raise credentials_exception
-    user = get_user(fake_users_db, username=token_data.username)
+    user = await get_user_by_username(session, username=token_data.username)
     if user is None:
         raise credentials_exception
     return user

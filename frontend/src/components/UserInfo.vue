@@ -1,6 +1,6 @@
 <template>
   <div class="user-info">
-    <span>Добро пожаловать, <strong>{{ user?.first_name }}</strong></span> |
+    <span>Добро пожаловать, <strong>{{ user?.first_name }}</strong> | </span>
     <a href="#" @click.prevent="logout" class="logout">Выход</a>
   </div>
 </template>

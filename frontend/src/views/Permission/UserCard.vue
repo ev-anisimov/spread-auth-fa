@@ -1,22 +1,22 @@
 <template>
   <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
-      <AppBreadcrumbs :items="breadcrumbs" />
+      <AppBreadcrumbs :items="breadcrumbs"/>
       <div>
         <button
-          v-if="!isEditing"
-          class="btn btn-outline-success me-2"
-          @click="toggleEditMode"
+            v-if="!isEditing"
+            class="btn btn-outline-success me-2"
+            @click="toggleEditMode"
         >
           Редактировать
         </button>
         <button
-          v-if="isEditing"
-          class="btn btn-outline-success me-2"
-          @click="saveChanges"
-          :disabled="!hasChanges"
+            v-if="isEditing"
+            class="btn btn-outline-success me-2"
+            @click="saveChanges"
+            :disabled="!hasChanges"
         >
-          Сохранить
+          {{ isNewUser ? "Создать" : "Сохранить изменения" }}
         </button>
         <button class="btn btn-outline-danger" @click="deleteUser">
           Удалить
@@ -31,10 +31,10 @@
           <label class="col-sm-1 col-form-label">Фамилия</label>
           <div class="col-sm-10">
             <input
-              type="text"
-              class="form-control"
-              v-model="localUser.last_name"
-              :disabled="!isEditing"
+                type="text"
+                class="form-control"
+                v-model="localUser.last_name"
+                :disabled="!isEditing"
             />
           </div>
         </div>
@@ -43,10 +43,10 @@
           <label class="col-sm-1 col-form-label">Имя</label>
           <div class="col-sm-10">
             <input
-              type="text"
-              class="form-control"
-              v-model="localUser.first_name"
-              :disabled="!isEditing"
+                type="text"
+                class="form-control"
+                v-model="localUser.first_name"
+                :disabled="!isEditing"
             />
           </div>
         </div>
@@ -55,10 +55,10 @@
           <label class="col-sm-1 col-form-label">Логин</label>
           <div class="col-sm-10">
             <input
-              type="text"
-              class="form-control"
-              v-model="localUser.username"
-              :disabled="!isEditing"
+                type="text"
+                class="form-control"
+                v-model="localUser.username"
+                :disabled="!isEditing"
             />
           </div>
         </div>
@@ -67,10 +67,10 @@
           <label class="col-sm-1 col-form-label">Служебный</label>
           <div class="col-sm-10">
             <input
-              type="checkbox"
-              class="form-check-input"
-              v-model="localUser.is_service"
-              :disabled="!isEditing"
+                type="checkbox"
+                class="form-check-input"
+                v-model="localUser.is_service"
+                :disabled="!isEditing"
             />
           </div>
         </div>
@@ -80,20 +80,24 @@
 </template>
 
 <script setup>
-import { onMounted, reactive, ref, watch } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import {onMounted, computed, reactive, ref, watch, inject} from "vue";
+import {useRoute, useRouter} from "vue-router";
 import axios from "axios";
 import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
+import {useAuthStore} from "@/stores/auth";
 
 const route = useRoute();
 const router = useRouter();
-const isEditing = ref(false); // Флаг режима редактирования
-const hasChanges = ref(false); // Флаг наличия изменений
+const hasChanges = ref(false);
+const authStore = useAuthStore();
+const notify = inject("notify");
+const isNewUser = computed(() => route.params.id === "new");
+const isEditing = ref(isNewUser.value);
 
 // Хлебные крошки
 const breadcrumbs = ref([
-  { label: "Пользователи", url: "/users" },
-  { label: "Карточка пользователя", url: "" }, // Это будет заменено
+  {label: "Пользователи", url: "/users"},
+  {label: "Карточка пользователя", url: ""},
 ]);
 
 // Данные пользователя из API
@@ -120,13 +124,15 @@ const checkForChanges = () => {
 async function fetchUser() {
   const userId = route.params.id;
   try {
-    const response = await axios.get(`/api/v1/users/${userId}`);
+    const response = await axios.get(`/api/v1/users/${userId}`, {
+      headers: {Authorization: `Bearer ${authStore.token}`}
+    });
     Object.assign(user, response.data);
     Object.assign(localUser, response.data);
 
     // Обновление хлебных крошек
     breadcrumbs.value[1].label = user.name;
-    breadcrumbs.value[1].url =  `/users/${user.id}`;
+    breadcrumbs.value[1].url = `/users/${user.id}`;
   } catch (error) {
     console.error("Ошибка при получении данных пользователя:", error);
   }
@@ -139,15 +145,24 @@ async function saveChanges() {
     return;
   }
   try {
-    const response = await axios.put(`/api/v1/users/${user.id}`, localUser);
+    let response;
+    if (isNewUser.value) {
+      response = await axios.post("/api/v1/users", localUser, {
+        headers: {Authorization: `Bearer ${authStore.token}`}
+      });
+    } else {
+      response = await axios.put(`/api/v1/users/${user.id}`, localUser, {
+        headers: {Authorization: `Bearer ${authStore.token}`}
+      });
+    }
     Object.assign(user, response.data); // Обновляем оригинальные данные
     Object.assign(localUser, response.data); // Синхронизируем локальные данные
     hasChanges.value = false; // Сбрасываем флаг изменений
     isEditing.value = false; // Выходим из режима редактирования
-    alert("Данные пользователя успешно сохранены!");
+    notify("Изменения сохранены", "success");
+
   } catch (error) {
-    console.error("Ошибка при сохранении данных пользователя:", error);
-    alert("Ошибка при сохранении пользователя.");
+    notify("Ошибка при сохранении пользователя", "error", false);
   }
 }
 
@@ -160,7 +175,9 @@ function toggleEditMode() {
 async function deleteUser() {
   if (!confirm("Вы уверены, что хотите удалить пользователя?")) return;
   try {
-    await axios.delete(`/api/v1/users/${user.id}`);
+    await axios.delete(`/api/v1/users/${user.id}`, {
+      headers: {Authorization: `Bearer ${authStore.token}`}
+    });
     await router.push("/users"); // Редирект на список пользователей
   } catch (error) {
     console.error("Ошибка при удалении пользователя:", error);
@@ -169,10 +186,12 @@ async function deleteUser() {
 }
 
 // Следим за изменениями в полях формы
-watch(localUser, checkForChanges, { deep: true });
+watch(localUser, checkForChanges, {deep: true});
 
 // Загрузка данных при монтировании
 onMounted(() => {
-  fetchUser();
+  if (!isNewUser.value) {
+    fetchUser();
+  }
 });
 </script>

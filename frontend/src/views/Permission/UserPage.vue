@@ -1,8 +1,8 @@
 <template>
-    <RouterView />
+  <!--    <RouterView />-->
   <div class="user-page">
-    <AddButton/>
     <div class="header">
+      <AddButton @add-handler="goToNewUser" />
       <div class="header-item">ФИО</div>
       <div class="header-item">Логин</div>
     </div>
@@ -20,15 +20,26 @@
 
 <script setup>
 import {onMounted, reactive} from "vue";
+import { useRouter } from "vue-router";
 import UserRow from "@/components/Permission/UserRow.vue";
 import axios from "axios";
 import AddButton from "@/components/AddButton.vue";
+import {useAuthStore} from "@/stores/auth";
 
+const authStore = useAuthStore();
 var userList = reactive([]);
+const router = useRouter();
+
+// Функция для перехода в режим создания нового пользователя
+const goToNewUser = () => {
+  router.push({ name: "usercard", params: { id: "new" } }); // Переход без данных
+};
 
 onMounted(async () => {
   try {
-    const response = await axios.get('api/v1/users');
+    const response = await axios.get('api/v1/users', {
+      headers: {Authorization: `Bearer ${authStore.token}`}
+    });
     userList.push(...response.data);
   } catch (error) {
     console.error("Ошибка при получении списка пользователей:", error);

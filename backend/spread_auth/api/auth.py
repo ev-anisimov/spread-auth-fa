@@ -3,16 +3,18 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+
+from sqlmodel.ext.asyncio.session import AsyncSession
+from spread_auth.core.db import get_session
 from spread_auth.core.config import settings
 from spread_auth.core.security import authenticate_user, create_access_token, get_current_user
 from spread_auth.models import UserBase, Token
 
 router = APIRouter(tags=["Auth"])
 
-
 @router.post("/login")
-async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], ) -> Token:
-    user = authenticate_user({}, form_data.username, form_data.password)
+async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm, Depends()], session:AsyncSession = Depends(get_session) ) -> Token:
+    user = await authenticate_user(session, form_data.username, form_data.password)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
