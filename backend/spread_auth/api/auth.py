@@ -3,7 +3,6 @@ from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-
 from sqlmodel.ext.asyncio.session import AsyncSession
 from spread_auth.core.db import get_session
 from spread_auth.core.config import settings
@@ -29,5 +28,6 @@ async def login_for_access_token(form_data: Annotated[OAuth2PasswordRequestForm,
 
 
 @router.get("/user")
-async def read_users_me(current_user: Annotated[UserBase, Depends(get_current_user)], ):
+async def read_user_me(current_user: Annotated[UserBase, Depends(get_current_user)], ):
     return current_user
+

@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-5 min-width">
     <div class="logo mx-auto">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1620.47 156.49" class="mt-2">
         <path class="a"

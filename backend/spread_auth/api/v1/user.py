@@ -1,14 +1,15 @@
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException
-from sqlmodel import select
 from sqlmodel.ext.asyncio.session import AsyncSession
 from core.db import get_session, update_object, get_objects
+from core.loggers import get_logger
 from core.security import get_current_user, get_password_hash
 from spread_auth.models.user import UserBase, User, UsersPublic, UserPublic, UserCreate
 
 router = APIRouter(prefix="/users", tags=["Users"])
 
+logger = get_logger(__name__)
 
 @router.get(
     "/",
@@ -17,6 +18,7 @@ router = APIRouter(prefix="/users", tags=["Users"])
 )
 async def get_users(session: AsyncSession = Depends(get_session), filters=None, joined=None, order=None,
                     limit: Optional[int] = 20, offset: Optional[int] = 0) -> list[UserPublic]:
+    logger.info(f"get_users filters: {filters}")
     result = await get_objects(session, User)
     return result
 
@@ -42,14 +44,17 @@ async def update_user(
         session: AsyncSession = Depends(get_session),
         current_user: User = Depends(get_current_user)
 ) -> UserPublic:
-    if current_user.id != user_id and not current_user.is_staff:
-        raise HTTPException(status_code=403, detail="Access denied")
-    user_data = user.model_dump()
-    extra_data = {'id': user_id}
-    if 'password' in user_data:
-        extra_data["hashed_password"] = get_password_hash(user_data['password'])
-    db_user = await update_object(session, User, user_id, user, extra_data)
-    return db_user
+    try:
+        if current_user.id != user_id and not current_user.is_staff:
+            raise HTTPException(status_code=403, detail="Access denied")
+        user_data = user.model_dump()
+        extra_data = {'id': user_id}
+        if 'password' in user_data:
+            extra_data["hashed_password"] = get_password_hash(user_data['password'])
+        db_user = await update_object(session, User, user_id, user, extra_data)
+        return db_user
+    except Exception as ex:
+        raise HTTPException(status_code=500, detail=str(ex))
 
 
 @router.post(

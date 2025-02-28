@@ -57,11 +57,13 @@ def get_logger(name):
     :return: Экземпляр логгера
     """
     # formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-    formatter = logging.Formatter('%(asctime)s [%(name)-35s.%(funcName)-15s:(%(lineno)4d)] %(levelname)s - %(message)s')
+    formatter = logging.Formatter('%(asctime)s [%(name)-35s.%(funcName)-15s:(%(lineno)2d)] %(levelname)s - %(message)s')
 
     logger = logging.getLogger(name)
     logger.setLevel(settings.LOG_LEVEL)
 
+    # if logger.hasHandlers():
+    #     return logger
     handler = RotatingFileHandler(filename=f'{settings.PROJECT_NAME}.log', maxBytes=10000000, backupCount=5)
     handler.setLevel(settings.LOG_LEVEL)
     handler.setFormatter(formatter)

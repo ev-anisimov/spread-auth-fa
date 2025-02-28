@@ -1,17 +1,18 @@
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
 
-import uvicorn
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 
-from core.config import settings
+from spread_auth.core.middleware import LoggingMiddleware
+from spread_auth.core.db import init_db
+from spread_auth.core.config import settings
 from spread_auth.api import routes
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
-    # await init_db()
+    await init_db()
     yield
 
 
@@ -28,9 +29,11 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+app.add_middleware(LoggingMiddleware)
 app.include_router(routes.api_router, prefix="/api")
 
+# app.middleware("http")(logging_middleware)
 
 if __name__ == "__main__":
+    import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=5000, reload=True)

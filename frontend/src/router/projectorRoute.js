@@ -1,43 +1,21 @@
-// import { createRouter, createWebHistory } from 'vue-router'
-// // import HomeView from '../views/HomeView.vue'
-//
-// const routes = [
-//
-//     {
-//     path: '/users/',
-//     name: 'users',
-//     component: () => import(/* webpackChunkName: "about" */ '../views/HomeView.vue')
-//   },
-//     {
-//     path: '/projector/',
-//     name: 'projector',
-//     component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-//   }
-//   // {
-//   //   path: '/',
-//   //   name: 'home',
-//   //   component: HomeView
-//   // },
-//   // {
-//   //   path: '/about',
-//   //   name: 'about',
-//   //   // route level code-splitting
-//   //   // this generates a separate chunk (about.[hash].js) for this route
-//   //   // which is lazy-loaded when the route is visited.
-//   //   component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-//   // }
-// ]
-//
-// const permissionRoutes = createRouter({
-//   history: createWebHistory(process.env.BASE_URL),
-//   routes
-// })
 
 export default [
     {
-        path: '/projector/',
-        name: 'projector',
-        component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+        path: '/settings/',
+        name: 'settings',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Projector/SettingsView.vue'),
         meta: { requiresAuth: true }
     },
+    {
+        path: '/projects/',
+        name: 'projects',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Projector/ProjectsPage.vue'),
+        meta: { requiresAuth: true }
+    },
+    {
+        path: '/projects/:id',
+        name: 'projectcard',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Projector/ProjectCard.vue'),
+        meta: {requiresAuth: true}
+    }
 ];

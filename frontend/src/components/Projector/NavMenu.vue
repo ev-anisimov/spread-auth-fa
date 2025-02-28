@@ -10,8 +10,8 @@
       <!--    <span class="fs-4">AWADA</span>-->
     </RouterLink>
     <hr>
-    <RouterLink :to="{ name: 'users' }" :active-class="'active'" class="nav-link text-white">Пользователи</RouterLink>
-    <RouterLink :to="{ name: 'roles' }" :active-class="'active'" class="nav-link text-white">Роли</RouterLink>
+    <RouterLink :to="{ name: 'settings' }" :active-class="'active'" class="nav-link text-white">Настройки</RouterLink>
+    <RouterLink :to="{ name: 'projects' }" :active-class="'active'" class="nav-link text-white">Проекты</RouterLink>
     <!--    <RouterLink to="/system-users" class="nav-link text-white">Системные пользователи</RouterLink>-->
     <!--    <RouterLink to="/permissions-check" class="nav-link text-white">Проверка прав</RouterLink>-->
   </nav>

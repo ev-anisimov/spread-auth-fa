@@ -1,7 +1,6 @@
 <template>
-  <div class="user-row" @click="openCard">
-    <div class="user">{{ props.fullName }}</div>
-    <div class="user">{{ props.username }}</div>
+  <div class="row" @click="openCard">
+    <div class="item">{{ props.name }}</div>
   </div>
 </template>
 
@@ -14,11 +13,7 @@ const props = defineProps({
     type: [String, Number],
     required: false
   },
-  fullName: {
-    type: String,
-    required: true
-  },
-  username: {
+  name: {
     type: String,
     required: true
   }
@@ -26,14 +21,15 @@ const props = defineProps({
 const router = useRouter();
 
 function openCard() {
-  router.push({name: 'usercard', params: {id: props.id}});
+  router.push({name: 'projectcard', params: {id: props.id}});
 }
 </script>
 
 <style scoped>
 
+
 /* Строка пользователя */
-.user-row {
+.row {
   display: grid;
   grid-template-columns: 2fr 1fr; /* Соответствует заголовкам */
   padding: 10px 0 10px 5px;
@@ -41,11 +37,11 @@ function openCard() {
   transition: background-color 0.2s;
 }
 
-.user-row:hover {
+.row:hover {
   background-color: #f1f3f5;
 }
 
-.user {
+.item {
   text-align: left;
   color: #007bff;
   cursor: pointer;

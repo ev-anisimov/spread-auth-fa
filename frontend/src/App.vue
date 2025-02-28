@@ -6,24 +6,28 @@
     <!-- Если пользователь авторизован -->
     <template v-else>
 
-      <NotificationBox  ref="notificationRef" />
+      <NotificationBox ref="notificationRef"/>
       <div v-if="isHomePage" class="container mt-5">
         <RouterLink :to="{ name: 'users' }" class="btn btn-secondary btn-lg btn-block">
           Администрирование прав
         </RouterLink>
-        <RouterLink :to="{ name: 'projector' }" class="btn btn-secondary btn-lg btn-block">
+        <RouterLink :to="{ name: 'settings' }" class="btn btn-secondary btn-lg btn-block">
           Настройки сервиса
         </RouterLink>
       </div>
 
       <div v-else class="d-flex">
         <!-- Боковое меню (только если авторизован) -->
-        <div class="col-2">
-          <NavMenu/>
+        <div class="col-1 min-width">
+          <PermissionMenu v-if="isAdministatedPage"/>
+          <ProjectorMenu v-if="isProjectorPage"/>
         </div>
         <!-- Основной контент -->
         <div class="col-10 p-1 content-area">
-          <UserInfo/>
+          <div class="app-header justify-content-between align-items-center">
+            <AppBreadcrumbs :items="breadcrumbs"/>
+            <UserInfo/>
+          </div>
           <RouterView/>
         </div>
       </div>
@@ -32,11 +36,13 @@
 </template>
 
 <script setup>
-import {computed,  ref, provide} from 'vue';
+import {computed, ref, provide} from 'vue';
 import {useRoute} from 'vue-router';
 import {useAuthStore} from "@/stores/auth";
 
-import NavMenu from '@/components/Permission/NavMenu.vue';
+import AppBreadcrumbs from "@/components/AppBreadcrumbs.vue";
+import PermissionMenu from '@/components/Permission/NavMenu.vue';
+import ProjectorMenu from '@/components/Projector/NavMenu.vue';
 import UserInfo from "@/components/UserInfo.vue";
 import LoginView from "@/views/LoginView.vue";
 import NotificationBox from "@/components/NotificationBox.vue";
@@ -49,12 +55,19 @@ const authStore = useAuthStore();
 // Проверка, является ли текущая страница домашней
 const isHomePage = computed(() => route.path === '/');
 
+const isAdministatedPage = computed(() => ["/users", "/roles"].some(page => route.path.startsWith(page)));
 
-// Создаем инстанс уведомлений
+const isProjectorPage = computed(() => ["/settings", "/projects"].some(page => route.path.startsWith(page)));
+// Ссылка на крошки
+const breadcrumbs = ref([]);
 // Ссылка на Notification
 const notificationRef = ref(null);
 provide("notify", (text, type, autoClose) => {
   notificationRef.value?.addMessage(text, type, autoClose);
+});
+
+provide("setBreadcrumbs", (items) => {
+  breadcrumbs.value = items;
 });
 </script>
 
@@ -64,7 +77,12 @@ provide("notify", (text, type, autoClose) => {
   display: flex;
   flex-direction: column;
 }
-
+.app-header {
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+  background-color: #f8f9fa;
+  display: flex;
+}
 div > a {
   display: block;
   margin-top: 5px;
@@ -95,5 +113,8 @@ div > a {
 .content-area {
   overflow-y: auto; /* Добавлена прокрутка только для этого блока */
   max-height: calc(100vh - 50px); /* Ограничиваем высоту, чтобы прокрутка появилась */
+}
+.min-width {
+  min-width: fit-content;
 }
 </style>

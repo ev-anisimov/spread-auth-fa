@@ -33,7 +33,7 @@ def run_upgrade(connection, cfg):
 
 async def init_db():
     """Инициализация базы данных. Создание при отсутствии. Применение миграций"""
-    logger.info(f"init_db {settings.DATABASE_NAME}")
+    logger.info(f"init_db dbname: {settings.DATABASE_NAME}")
     sync_engine = create_engine(str(settings.SQLALCHEMY_DATABASE_SYNC_URI))
     try:
         if not database_exists(sync_engine.url):
@@ -60,13 +60,13 @@ async def get_session() -> AsyncSession:
         yield session
 
 
-async def get_object(session: AsyncSession, model_object: SQLModel, obj_id: int):
+async def get_object_by_id(session: AsyncSession, model_object: SQLModel, obj_id: int):
     db_obj = await session.get(model_object, obj_id)
     return db_obj
 
 
 async def update_object(session: AsyncSession, model_object: SQLModel, obj_id: int, obj_data: SQLModel, extra_data:dict=None):
-    db_obj = await get_object(session, model_object, obj_id)
+    db_obj = await get_object_by_id(session, model_object, obj_id)
     db_obj.sqlmodel_update(obj_data.model_dump(), update=extra_data or {})
     session.add(db_obj)
     await session.commit()

@@ -1,22 +1,22 @@
 <template>
   <!--    <RouterView />-->
-  <div class="page card">
+  <div class="role-page card">
     <ToolBar>
-        <template #buttons>
-         <AddButton @add-handler="goToNewUser" />
-        </template>
-      </ToolBar>
+      <template #buttons>
+        <AddButton @add-handler="goToNewRole"/>
+      </template>
+    </ToolBar>
     <div class="header">
-      <div class="header-item">ФИО</div>
-      <div class="header-item">Логин</div>
+      <div class="header-item">Название</div>
+      <div class="header-item"></div>
     </div>
-    <div class="user-list">
-      <UserRow
-          v-for="user in userList"
-          :key="user.id"
-          :id="user.id"
-          :full-name="user.name"
-          :username="user.username"
+    <div class="role-list">
+      <RoleRow
+          v-for="role in roleList"
+          :key="role.id"
+          :id="role.id"
+          :name="role.name"
+          :cnt="role.cnt"
       />
     </div>
   </div>
@@ -24,42 +24,39 @@
 
 <script setup>
 import {inject, onMounted, reactive} from "vue";
-import { useRouter } from "vue-router";
-import UserRow from "@/components/Permission/UserRow.vue";
+import {useRouter} from "vue-router";
 import axios from "axios";
 import AddButton from "@/components/Buttons/AddButton.vue";
 import {useAuthStore} from "@/stores/auth";
-// import EditButton from "@/components/Buttons/EditButton.vue";
-// import SaveButton from "@/components/Buttons/SaveButton.vue";
-// import DeleteButton from "@/components/Buttons/DeleteButton.vue";
+import RoleRow from "@/components/Permission/RoleRow.vue";
 import ToolBar from "@/components/ToolBar.vue";
 
 const authStore = useAuthStore();
-var userList = reactive([]);
+var roleList = reactive([]);
 const router = useRouter();
 const setBreadcrumbs = inject("setBreadcrumbs");
 
 // Функция для перехода в режим создания нового пользователя
-const goToNewUser = () => {
-  router.push({ name: "usercard", params: { id: "new" } }); // Переход без данных
+const goToNewRole = () => {
+  router.push({name: "usercard", params: {id: "new"}}); // Переход без данных
 };
 
 onMounted(async () => {
   try {
-    const response = await axios.get('api/v1/users', {
+    let response = await axios.get('api/v1/roles/with_count/', {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
-    userList.push(...response.data);
+    roleList.push(...response.data);
     setBreadcrumbs([]);
   } catch (error) {
-    console.error("Ошибка при получении списка пользователей:", error);
+    console.error("Ошибка при получении списка ролей:", error);
   }
 });
 </script>
 
 <style scoped>
 /* Общая обёртка для страницы пользователей */
-.page {
+.role-page {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -89,13 +86,12 @@ onMounted(async () => {
 }
 
 /* Список пользователей */
-.user-list {
+.role-list {
   display: flex;
   flex-direction: column;
 }
 
-
-.user-row > div {
+.role-row > div {
   padding: 0 10px;
   display: flex;
   align-items: center; /* Вертикальное выравнивание */

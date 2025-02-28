@@ -1,15 +1,21 @@
+import json
+import os
 import secrets
 from typing import Any, Literal
+from pathlib import Path, PurePath
 
 from pydantic import (
     Field,
     PostgresDsn,
     computed_field,
+    BaseModel,
 )
-from pydantic_core import MultiHostUrl
+from pydantic_core import MultiHostUrl, from_json
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from dotenv import load_dotenv, find_dotenv
+
+from spread_auth.core.singleton import BaseSingleton, SingletonMeta
 
 load_dotenv(find_dotenv('.env'))
 
@@ -21,8 +27,53 @@ def parse_cors(v: Any) -> list[str] | str:
         return v
     raise ValueError(v)
 
+def read_file_config():
+    if settings.CONFIG_FILE.exists():
+        with settings.CONFIG_FILE.open('r') as f:
+            return json.load(f)
+    return {}
 
-# DOTENV = os.path.join(os.path.dirname(__file__), ".env")
+def write_file_config(_data:dict):
+    settings.CONFIG_FILE.parent.mkdir(parents=True, exist_ok=True)
+    settings.CONFIG_FILE.write_text(json.dumps(_data, indent=4))
+
+
+class FileConfig:
+    """Pydantic-модель с поддержкой Singleton и загрузки из файла."""
+    name:str = None
+    project_id:int = None
+    _instance = None  # Для хранения Singleton
+
+    def __new__(cls, *args, **kwargs):
+        """Гарантирует, что всегда возвращается один и тот же объект."""
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+            cls._instance.reload()  # Загружаем данные при первом создании
+        return cls._instance
+
+    def reload(self):
+        """Перезаписывает данные из файла конфигурации."""
+        _data = read_file_config()
+        self.name = _data.get("name")
+        self.project_id = _data.get("project_id")
+
+    def update(self, _data):
+        self.__dict__.update(_data)
+        self.save()
+
+    def save(self):
+        """Сохраняет текущий конфиг в файл."""
+        write_file_config(self.to_json())
+
+    def to_json(self) -> dict:
+        """
+        Сериализовать поля синглтона в json
+        """
+        # res = {
+        #     'name': self.name,
+        #     'project_id': self.project_id,
+        # }
+        return self.__dict__
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(
@@ -59,11 +110,27 @@ class Settings(BaseSettings):
     # ENVIRONMENT: Literal["local", "staging", "production"] = "local"
     #     ]
 
-
     FIRST_SUPERUSER: str
     FIRST_SUPERUSER_PASSWORD: str
 
-    @computed_field  # type: ignore[prop-decorator]
+
+    CONFIG_PATH: str = str(Path('/', 'var', 'project'))
+    CONFIG_FILE_NAME: str = 'auth.json'
+
+    ENTITY_PATH: str = str(Path('/', 'var', 'project'))
+    ENTITY_FILE_NAME: str = 'entity.json'
+
+    @computed_field
+    @property
+    def CONFIG_FILE(self) -> Path:
+        return Path(self.CONFIG_PATH) / self.CONFIG_FILE_NAME
+
+    @computed_field
+    @property
+    def ENTITY_FILE(self) -> Path:
+        return Path(self.ENTITY_PATH) / self.ENTITY_FILE_NAME
+
+    @computed_field
     @property
     def SQLALCHEMY_DATABASE_URI(self) -> PostgresDsn:
         return MultiHostUrl.build(
@@ -75,7 +142,7 @@ class Settings(BaseSettings):
             path=self.DATABASE_NAME,
         )
 
-    @computed_field  # type: ignore[prop-decorator]
+    @computed_field
     @property
     def SQLALCHEMY_DATABASE_SYNC_URI(self) -> PostgresDsn:
         return MultiHostUrl.build(
@@ -105,3 +172,5 @@ class Settings(BaseSettings):
 #     print("Error loading settings:", e)
 
 settings = Settings()
+# file_config = FileConfig()
+# file_config.reload()

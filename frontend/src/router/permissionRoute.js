@@ -49,7 +49,25 @@ export default [
     {
         path: '/users/:id',
         name: 'usercard',
-        component: () => import(/* webpackChunkName: "about" */ '../views/Permission/UserCard.vue'),
+        component: () => import(/* webpackChunkName: "about" */ '../components/Permission/UserCard.vue'),
+        meta: {requiresAuth: true}
+    },
+    {
+        path: '/roles/',
+        name: 'roles',
+        component: () => import(/* webpackChunkName: "about" */ '../views/Permission/RolePage.vue'),
+        meta: {requiresAuth: true}
+        // children:[
+        //     {
+        //         path:'qq',
+        //         component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+        //     }
+        // ]
+    },
+    {
+        path: '/roles/:id',
+        name: 'rolecard',
+        component: () => import(/* webpackChunkName: "about" */ '../components/Permission/RoleCard.vue'),
         meta: {requiresAuth: true}
     }
 ];

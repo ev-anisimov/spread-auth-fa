@@ -1,62 +1,97 @@
 <template>
-  <div class="notifications">
-    <div
-      v-for="(message, index) in messages"
-      :key="index"
-      :class="['notification', message.type]"
-      @click="removeMessage(index)"
-    >
-      {{ message.text }}
-    </div>
+  <div class="notification-container">
+    <transition-group name="fade">
+      <div
+        v-for="(message, index) in messages"
+        :key="index"
+        class="notification"
+        :class="message.type"
+        @click="removeMessage(index)"
+      >
+        {{ message.text }}
+      </div>
+    </transition-group>
   </div>
 </template>
 
 <script setup>
-import { ref, defineExpose } from "vue";
+import {ref, defineExpose} from "vue";
 
 const messages = ref([]);
 
+// Добавляем сообщение
 const addMessage = (text, type = "success", autoClose = true) => {
-  messages.value.push({ text, type });
+  messages.value.push({text, type});
 
   if (autoClose) {
     setTimeout(() => {
-      messages.value.shift();
+      removeMessage(0);
     }, 3000);
   }
 };
 
+// Удаление сообщения
 const removeMessage = (index) => {
-  messages.value.splice(index, 1);
+  if (messages.value[index]) {
+    messages.value.splice(index, 1);
+  }
 };
 
-defineExpose({ addMessage });
+// Экспортируем метод
+defineExpose({addMessage});
 </script>
 
 <style scoped>
-.notifications {
+/* Контейнер для сообщений */
+.notification-container {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
   z-index: 1000;
 }
 
+/* Стили сообщений */
 .notification {
-  padding: 10px 15px;
+  min-width: 250px;
+  max-width: 400px;
+  padding: 12px 16px;
+  margin-bottom: 10px;
   border-radius: 5px;
-  color: #fff;
+  font-size: 14px;
+  text-align: center;
   cursor: pointer;
-  transition: opacity 0.3s;
+  transition: all 0.3s ease-in-out;
+  border: 1px solid #ccc;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
-.notification.success {
-  background-color: green;
+/* Цвета сообщений */
+.success {
+  border-color: #28a745;
+  color: #155724;
 }
 
-.notification.error {
-  background-color: red;
+.error {
+  border-color: #dc3545;
+  color: #721c24;
+}
+
+.warning {
+  border-color: blueviolet;
+  color: darkviolet;
+}
+/* Анимация */
+.fade-enter-active, .fade-leave-active {
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-enter-from, .fade-leave-to {
+  opacity: 0;
+  transform: translateY(-20px);
 }
 </style>

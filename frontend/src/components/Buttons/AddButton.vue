@@ -1,11 +1,14 @@
 <template>
-  <div class="d-flex justify-content-start mb-4">
-    <button type="button" class="btn btn-success" @click="handleClick">Добавить</button>
-  </div>
+  <button
+      class="btn btn-outline-success  me-2"
+      @click="handleClick"
+  >
+    Добавить
+  </button>
 </template>
 
 <script setup>
-import { defineEmits } from 'vue';
+import {defineEmits} from 'vue';
 
 // Создаём emit-событие
 const emit = defineEmits(["add-handler"]);

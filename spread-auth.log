@@ -1,116 +1,1162 @@
-2025-01-15 14:05:10,326 [core.db                            .init_db        :(  25)] INFO - init_db auth
-2025-01-15 14:05:10,326 [core.db                            .init_db        :(  31)] ERROR - Expected string or URL object, got MultiHostUrl('postgresql+asyncpg://postgres:postgres@localhost:5432/auth')
-Traceback (most recent call last):
-  File "/home/egor/Repository/spread-auth-fa/backend/spread_auth/core/db.py", line 27, in init_db
-    sync_engine = create_engine(settings.SQLALCHEMY_DATABASE_URI)
-                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<string>", line 2, in create_engine
-  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib64/python3.11/site-packages/sqlalchemy/util/deprecations.py", line 281, in warned
-    return fn(*args, **kwargs)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^
-  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib64/python3.11/site-packages/sqlalchemy/engine/create.py", line 549, in create_engine
-    u = _url.make_url(url)
-        ^^^^^^^^^^^^^^^^^^
-  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib64/python3.11/site-packages/sqlalchemy/engine/url.py", line 860, in make_url
-    raise exc.ArgumentError(
-sqlalchemy.exc.ArgumentError: Expected string or URL object, got MultiHostUrl('postgresql+asyncpg://postgres:postgres@localhost:5432/auth')
-2025-01-16 11:09:41,463 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 11:10:06,520 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 11:13:48,489 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 11:14:18,313 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 11:14:38,565 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 11:55:17,361 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 11:56:05,329 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 11:56:07,981 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-16 11:56:11,754 [core.db                            .init_db        :(  45)] INFO - init_db migrate end
-2025-01-16 13:05:34,869 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 13:05:38,961 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-16 13:06:07,245 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 13:06:07,365 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-16 14:06:54,365 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 14:06:54,453 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-16 15:08:41,770 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 15:08:41,858 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-16 15:11:27,534 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 15:11:27,649 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-16 15:14:37,891 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-16 15:14:37,974 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-21 13:16:18,404 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-21 13:16:18,541 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-21 13:16:37,722 [core.db                            .init_db        :(  48)] ERROR - Path doesn't exist: '/home/egor/Repository/spread-auth-fa/spread_auth/alembic'.  Please use the 'init' command to create a new scripts folder.
-Traceback (most recent call last):
-  File "/home/egor/Repository/spread-auth-fa/backend/spread_auth/core/db.py", line 43, in init_db
-    await connection.run_sync(run_upgrade, cfg)
-  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib64/python3.11/site-packages/sqlalchemy/ext/asyncio/engine.py", line 887, in run_sync
-    return await greenlet_spawn(
-           ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib64/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 190, in greenlet_spawn
-    result = context.switch(*args, **kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/egor/Repository/spread-auth-fa/backend/spread_auth/core/db.py", line 26, in run_upgrade
-    command.upgrade(cfg, "head")
-  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib/python3.11/site-packages/alembic/command.py", line 386, in upgrade
-    script = ScriptDirectory.from_config(config)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib/python3.11/site-packages/alembic/script/base.py", line 229, in from_config
-    return ScriptDirectory(
-           ^^^^^^^^^^^^^^^^
-  File "/home/egor/Repository/spread-auth-fa/backend/.venv/lib/python3.11/site-packages/alembic/script/base.py", line 106, in __init__
-    raise util.CommandError(
-alembic.util.exc.CommandError: Path doesn't exist: '/home/egor/Repository/spread-auth-fa/spread_auth/alembic'.  Please use the 'init' command to create a new scripts folder.
-2025-01-21 13:18:02,189 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-21 13:18:02,325 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-21 15:29:14,543 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-21 15:29:14,698 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-21 16:30:18,939 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-21 16:30:19,051 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-22 11:06:17,686 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-22 11:06:17,828 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-22 13:59:35,325 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-22 13:59:35,438 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-22 14:01:46,675 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-22 14:01:46,788 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-23 11:08:32,031 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-23 11:08:32,178 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 11:27:51,693 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 11:27:51,832 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 11:43:07,662 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 11:43:07,759 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 11:43:31,361 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 11:43:31,481 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 11:44:52,956 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 11:44:53,073 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 11:45:15,320 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 11:45:15,418 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 11:49:16,423 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 11:49:16,536 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 11:56:55,589 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 11:56:55,721 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 14:51:58,403 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 14:51:58,559 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 14:54:36,057 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 14:54:36,167 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 14:55:39,373 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 14:55:39,512 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 14:55:58,065 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 14:55:58,198 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 14:56:22,448 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 14:56:22,572 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 14:57:56,620 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 14:57:56,746 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 14:58:12,529 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 14:58:12,644 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 14:58:28,086 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 14:58:28,203 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-24 14:58:55,290 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-24 14:58:55,407 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-27 11:14:21,326 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-27 11:14:21,431 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-27 14:52:26,028 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-27 14:52:26,135 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-27 16:09:52,692 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-27 16:09:52,821 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-27 16:11:01,662 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-27 16:11:01,788 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
-2025-01-27 16:12:18,347 [core.db                            .init_db        :(  30)] INFO - init_db auth
-2025-01-27 16:12:18,463 [core.db                            .init_db        :(  40)] INFO - init_db migrate run
+2025-02-19 14:45:03,933 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 14:45:04,089 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 14:48:56,755 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 14:48:56,891 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 14:52:18,514 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 14:52:18,656 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 14:54:20,744 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 14:54:20,877 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 14:56:09,905 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 14:56:10,030 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:01:35,405 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:01:35,536 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:02:17,675 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:02:17,820 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:02:21,844 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:02:22,020 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:03:00,428 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:03:00,546 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:03:41,467 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:03:41,575 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:13:24,976 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:13:25,111 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:14:39,928 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:14:40,064 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:15:22,293 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:15:22,416 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:15:40,733 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:15:40,859 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:16:47,673 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:16:47,765 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:17:57,666 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:28:05,430 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:29:12,783 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:29:12,912 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:30:16,813 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:17:57,777 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:18:49,861 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:18:49,995 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:19:33,981 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:19:34,079 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:21:11,433 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:21:11,554 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:24:42,909 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:24:43,025 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:28:05,299 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:30:16,908 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:35:56,969 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:35:57,073 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:36:35,667 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:36:35,798 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:39:52,328 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:39:52,452 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:40:21,357 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:40:21,487 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:41:25,069 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:41:25,228 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:41:26,933 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-19 15:42:00,352 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/roles/with_count/ 
+2025-02-19 15:42:00,472 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:42:01,137 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: OPTIONS /api/v1/users 
+2025-02-19 15:42:01,137 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: OPTIONS /api/v1/users 
+2025-02-19 15:42:01,139 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:42:01,139 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:42:01,149 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users 
+2025-02-19 15:42:01,149 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users 
+2025-02-19 15:42:01,149 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users 
+2025-02-19 15:42:01,152 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 307
+2025-02-19 15:42:01,152 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 307
+2025-02-19 15:42:01,152 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 307
+2025-02-19 15:42:01,169 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: OPTIONS /api/v1/users/ 
+2025-02-19 15:42:01,169 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: OPTIONS /api/v1/users/ 
+2025-02-19 15:42:01,169 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: OPTIONS /api/v1/users/ 
+2025-02-19 15:42:01,169 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: OPTIONS /api/v1/users/ 
+2025-02-19 15:42:01,170 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:42:01,170 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:42:01,170 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:42:01,170 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:42:01,218 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users/ 
+2025-02-19 15:42:01,218 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users/ 
+2025-02-19 15:42:01,218 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users/ 
+2025-02-19 15:42:01,218 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users/ 
+2025-02-19 15:42:01,218 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users/ 
+2025-02-19 15:42:01,226 [spread_auth.api.v1.user            .get_users      :(  22)] INFO - get_users filters: None
+2025-02-19 15:42:01,236 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:42:01,236 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:42:01,236 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:42:01,236 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:42:01,236 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:44:26,965 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:44:27,089 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:44:29,316 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-19 15:44:39,311 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/roles/with_count/ 
+2025-02-19 15:44:39,410 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:44:42,159 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users 
+2025-02-19 15:44:42,159 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users 
+2025-02-19 15:44:42,161 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 307
+2025-02-19 15:44:42,161 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 307
+2025-02-19 15:44:42,180 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users/ 
+2025-02-19 15:44:42,180 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users/ 
+2025-02-19 15:44:42,180 [core.loggers                       .logging_middleware:(  83)] INFO - Incoming request: GET /api/v1/users/ 
+2025-02-19 15:44:42,185 [spread_auth.api.v1.user            .get_users      :(  22)] INFO - get_users filters: None
+2025-02-19 15:44:42,190 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:44:42,190 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:44:42,190 [core.loggers                       .logging_middleware:(  85)] INFO - Outgoing response code: 200
+2025-02-19 15:46:26,547 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:46:26,662 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:46:29,167 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-19 15:46:36,785 [spread_auth.api.v1.user            .get_users      :(  22)] INFO - get_users filters: None
+2025-02-19 15:47:17,653 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-19 15:47:17,772 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-19 15:47:17,826 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-19 15:47:17,845 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/users | Body: None
+2025-02-19 15:47:17,850 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 307 | Time: 0.01s
+2025-02-19 15:47:17,875 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-19 15:47:17,981 [spread_auth.api.v1.user            .get_users      :(  22)] INFO - get_users filters: None
+2025-02-19 15:47:17,987 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.11s
+2025-02-19 15:47:20,815 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/roles/with_count/ | Body: None
+2025-02-19 15:47:20,838 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.02s
+2025-02-19 15:47:26,024 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/users | Body: None
+2025-02-19 15:47:26,027 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 307 | Time: 0.00s
+2025-02-19 15:47:26,040 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-19 15:47:26,049 [spread_auth.api.v1.user            .get_users      :(  22)] INFO - get_users filters: None
+2025-02-19 15:47:26,055 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.02s
+2025-02-20 15:03:15,451 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-20 15:03:15,610 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-20 15:03:15,673 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-20 15:03:37,462 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: POST http://localhost:5000/api/login | Body: -----------------------------13385262203853372626210622943
+Content-Disposition: form-data; name="username"
+
+admin
+-----------------------------13385262203853372626210622943
+Content-Disposition: form-data; name="password"
+
+proadmin
+-----------------------------13385262203853372626210622943--
+
+2025-02-20 15:03:37,745 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.28s
+2025-02-20 15:03:37,762 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: OPTIONS http://localhost:5000/api/user | Body: None
+2025-02-20 15:03:37,763 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-20 15:03:37,767 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/user | Body: None
+2025-02-20 15:03:37,875 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.11s
+2025-02-20 15:03:39,990 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: OPTIONS http://localhost:5000/api/v1/users | Body: None
+2025-02-20 15:03:39,992 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-20 15:03:40,009 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/users | Body: None
+2025-02-20 15:03:40,025 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 307 | Time: 0.02s
+2025-02-20 15:03:40,063 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: OPTIONS http://localhost:5000/api/v1/users/ | Body: None
+2025-02-20 15:03:40,065 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-20 15:03:40,079 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-20 15:03:40,089 [spread_auth.api.v1.user            .get_users      :(  22)] INFO - get_users filters: None
+2025-02-20 15:03:40,113 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.03s
+2025-02-20 15:06:30,247 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/users | Body: None
+2025-02-20 15:06:30,249 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 307 | Time: 0.00s
+2025-02-20 15:06:30,337 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-20 15:06:30,344 [spread_auth.api.v1.user            .get_users      :(  22)] INFO - get_users filters: None
+2025-02-20 15:06:30,351 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-20 15:06:45,755 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: POST http://localhost:5000/api/login | Body: -----------------------------3090743626956883363781154945
+Content-Disposition: form-data; name="username"
+
+admin
+-----------------------------3090743626956883363781154945
+Content-Disposition: form-data; name="password"
+
+proadmin
+-----------------------------3090743626956883363781154945--
+
+2025-02-20 15:06:45,948 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.19s
+2025-02-20 15:06:45,973 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/user | Body: None
+2025-02-20 15:06:45,980 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-20 15:06:47,353 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-20 15:06:47,361 [spread_auth.api.v1.user            .get_users      :(  22)] INFO - get_users filters: None
+2025-02-20 15:06:47,367 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-20 15:35:23,043 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: OPTIONS http://localhost:5000/api/v1/projects | Body: None
+2025-02-20 15:35:23,046 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-20 15:35:23,062 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/projects | Body: None
+2025-02-20 15:35:23,063 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 307 | Time: 0.00s
+2025-02-20 15:35:23,104 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: OPTIONS http://localhost:5000/api/v1/projects/ | Body: None
+2025-02-20 15:35:23,105 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-20 15:35:23,110 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/projects/ | Body: None
+2025-02-20 15:35:23,171 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.06s
+2025-02-20 15:35:23,883 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: OPTIONS http://localhost:5000/api/v1/users/ | Body: None
+2025-02-20 15:35:23,885 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-20 15:35:23,978 [core.middleware                    .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-20 15:35:23,984 [spread_auth.api.v1.user            .get_users      :(  22)] INFO - get_users filters: None
+2025-02-20 15:35:23,994 [core.middleware                    .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.02s
+2025-02-20 16:40:00,836 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-20 16:40:00,983 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-20 16:40:01,028 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-21 12:22:39,219 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-21 12:22:39,339 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-21 12:22:39,382 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-21 12:53:02,236 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-21 12:53:02,343 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-21 12:53:02,406 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-21 13:41:46,032 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/docs | Body: None
+2025-02-21 13:41:46,039 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 13:41:47,971 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/v1/openapi.json | Body: None
+2025-02-21 13:41:48,093 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.12s
+2025-02-21 13:41:53,686 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/docs | Body: None
+2025-02-21 13:41:53,691 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-21 13:41:54,562 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/v1/openapi.json | Body: None
+2025-02-21 13:41:54,569 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 13:43:46,091 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-21 13:43:46,223 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-21 13:43:46,266 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-21 13:49:30,326 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/docs | Body: None
+2025-02-21 13:49:30,331 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 13:49:30,876 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/v1/openapi.json | Body: None
+2025-02-21 13:49:30,987 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.11s
+2025-02-21 13:50:07,546 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 13:50:07,550 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 401 | Time: 0.00s
+2025-02-21 13:50:20,081 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: POST http://localhost:5000/api/login | Body: grant_type=password&username=admin&password=proadmin
+2025-02-21 13:50:20,370 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.29s
+2025-02-21 13:50:24,413 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 13:50:24,521 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.11s
+2025-02-21 13:50:52,671 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: POST http://localhost:5000/api/login | Body: -----------------------------38882865591819141696752809737
+Content-Disposition: form-data; name="username"
+
+admin
+-----------------------------38882865591819141696752809737
+Content-Disposition: form-data; name="password"
+
+proadmin
+-----------------------------38882865591819141696752809737--
+
+2025-02-21 13:50:52,872 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.20s
+2025-02-21 13:50:52,900 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: OPTIONS http://localhost:5000/api/user | Body: None
+2025-02-21 13:50:52,901 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-21 13:50:52,906 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/user | Body: None
+2025-02-21 13:50:52,914 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 13:50:54,881 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: OPTIONS http://localhost:5000/api/options/ | Body: None
+2025-02-21 13:50:54,882 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-21 13:50:54,892 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-21 13:50:54,901 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:04:32,952 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-21 14:04:33,095 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-21 14:04:33,126 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-21 14:04:33,829 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/docs | Body: None
+2025-02-21 14:04:33,838 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:04:34,720 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/v1/openapi.json | Body: None
+2025-02-21 14:04:34,842 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.12s
+2025-02-21 14:04:46,162 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: POST http://localhost:5000/api/login | Body: grant_type=password&username=admin&password=proadmin
+2025-02-21 14:04:46,433 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.27s
+2025-02-21 14:04:50,609 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:04:50,730 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.12s
+2025-02-21 14:05:01,945 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: PUT http://localhost:5000/api/options/ | Body: None
+2025-02-21 14:05:01,956 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:05:07,258 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:05:07,264 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:06:08,872 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/docs | Body: None
+2025-02-21 14:06:08,874 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-21 14:06:12,757 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-21 14:06:12,902 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-21 14:06:12,963 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-21 14:06:12,984 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/v1/openapi.json | Body: None
+2025-02-21 14:06:13,093 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.11s
+2025-02-21 14:06:33,398 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: POST http://localhost:5000/api/login | Body: grant_type=password&username=admin&password=proadmin
+2025-02-21 14:06:33,660 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.26s
+2025-02-21 14:06:41,007 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:06:41,116 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.11s
+2025-02-21 14:06:46,702 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: PUT http://localhost:5000/api/options/ | Body: None
+2025-02-21 14:06:46,710 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:06:52,683 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:06:52,690 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:07:01,547 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 14:07:01,556 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:07:14,647 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 14:07:14,654 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:07:24,278 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:07:24,286 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:07:35,170 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 14:07:35,174 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-21 14:10:22,712 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-21 14:10:22,831 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-21 14:10:22,876 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-21 14:10:22,895 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/docs | Body: None
+2025-02-21 14:10:22,899 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-21 14:10:24,033 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/v1/openapi.json | Body: None
+2025-02-21 14:10:24,125 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.09s
+2025-02-21 14:10:34,739 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: POST http://localhost:5000/api/login | Body: grant_type=password&username=admin&password=proadmin
+2025-02-21 14:10:35,022 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.28s
+2025-02-21 14:10:51,718 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:12:48,644 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-21 14:12:48,773 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-21 14:12:48,832 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-21 14:12:53,497 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:12:53,629 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.13s
+2025-02-21 14:13:21,117 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:13:21,124 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:13:25,421 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-21 14:13:25,549 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-21 14:13:25,596 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-21 14:13:32,070 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: PUT http://localhost:5000/api/options/ | Body: None
+2025-02-21 14:13:32,165 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.09s
+2025-02-21 14:13:41,292 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:13:41,302 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:13:44,762 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: PUT http://localhost:5000/api/options/ | Body: None
+2025-02-21 14:13:44,772 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:13:56,469 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 14:13:56,479 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:14:03,360 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: PUT http://localhost:5000/api/options/ | Body: None
+2025-02-21 14:14:03,370 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:14:09,342 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:14:09,350 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:16:46,756 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-21 14:16:46,846 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-21 14:16:46,886 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-21 14:16:54,051 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:16:54,157 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.11s
+2025-02-21 14:17:01,742 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/docs | Body: None
+2025-02-21 14:17:01,744 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.00s
+2025-02-21 14:17:02,771 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/v1/openapi.json | Body: None
+2025-02-21 14:17:02,884 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.11s
+2025-02-21 14:17:11,744 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: POST http://localhost:5000/api/login | Body: grant_type=password&username=admin&password=proadmin
+2025-02-21 14:17:11,991 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.25s
+2025-02-21 14:17:20,215 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 14:17:20,226 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:17:38,245 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: PUT http://localhost:5000/api/options/ | Body: None
+2025-02-21 14:17:38,256 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 14:17:47,539 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 14:17:47,546 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:21,450 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-21 15:12:21,580 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-21 15:12:21,623 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-21 15:12:22,205 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 15:12:22,314 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.11s
+2025-02-21 15:12:23,427 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 15:12:23,437 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:24,198 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 15:12:24,210 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:24,935 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 15:12:24,942 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:25,543 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 15:12:25,551 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:26,129 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 15:12:26,137 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:29,202 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 15:12:29,212 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:33,417 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 15:12:33,425 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:34,120 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 15:12:34,130 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:34,640 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/options/?limit=20&offset=0 | Body: None
+2025-02-21 15:12:34,652 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:36,963 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: PUT http://localhost:5000/api/options/ | Body: None
+2025-02-21 15:12:36,968 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:37,667 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: PUT http://localhost:5000/api/options/ | Body: None
+2025-02-21 15:12:37,674 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:42,081 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 15:12:42,089 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:12:42,682 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://localhost:5000/api/fil | Body: None
+2025-02-21 15:12:42,691 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.01s
+2025-02-21 15:41:47,238 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-21 15:41:47,363 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-21 15:41:47,401 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-24 13:42:34,293 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-24 13:42:34,402 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-24 13:42:34,445 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-24 13:44:01,841 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://127.0.0.1:5000/api/v1/options/ | Body: None
+2025-02-24 13:44:01,845 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 404 | Time: 0.00s
+2025-02-24 13:44:10,708 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-24 13:44:10,712 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 401 | Time: 0.00s
+2025-02-24 13:44:15,532 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: POST http://127.0.0.1:5000/api/login/ | Body: ----------------------------673120601863839099342783
+Content-Disposition: form-data; name="username"
+
+admin
+----------------------------673120601863839099342783
+Content-Disposition: form-data; name="password"
+
+proadmin
+----------------------------673120601863839099342783--
+
+2025-02-24 13:44:15,535 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 307 | Time: 0.00s
+2025-02-24 13:44:15,546 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: POST http://127.0.0.1:5000/api/login | Body: ----------------------------227728971189637969726247
+Content-Disposition: form-data; name="username"
+
+admin
+----------------------------227728971189637969726247
+Content-Disposition: form-data; name="password"
+
+proadmin
+----------------------------227728971189637969726247--
+
+2025-02-24 13:44:15,856 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.31s
+2025-02-24 13:44:19,697 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - 📥 Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-24 13:44:19,808 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - 📤 Response: 200 | Time: 0.11s
+2025-02-24 13:47:30,413 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-24 13:47:30,530 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-24 13:47:30,566 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-24 13:47:46,167 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-24 13:47:46,284 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-24 13:47:46,334 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-24 13:47:57,208 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-24 13:47:57,326 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.12s
+2025-02-24 13:48:49,201 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: POST http://127.0.0.1:5000/api/options/ | Body: {"query":"\n    query IntrospectionQuery {\n      __schema {\n        \n        queryType { name }\n        mutationType { name }\n        subscriptionType { name }\n        types {\n          ...FullType\n        }\n        directives {\n          name\n          description\n          \n          locations\n          args {\n            ...InputValue\n          }\n        }\n      }\n    }\n\n    fragment FullType on __Type {\n      kind\n      name\n      description\n      \n      fields(includeDeprecated: true) {\n        name\n        description\n        args {\n          ...InputValue\n        }\n        type {\n          ...TypeRef\n        }\n        isDeprecated\n        deprecationReason\n      }\n      inputFields {\n        ...InputValue\n      }\n      interfaces {\n        ...TypeRef\n      }\n      enumValues(includeDeprecated: true) {\n        name\n        description\n        isDeprecated\n        deprecationReason\n      }\n      possibleTypes {\n        ...TypeRef\n      }\n    }\n\n    fragment InputValue on __InputValue {\n      name\n      description\n      type { ...TypeRef }\n      defaultValue\n      \n      \n    }\n\n    fragment TypeRef on __Type {\n      kind\n      name\n      ofType {\n        kind\n        name\n        ofType {\n          kind\n          name\n          ofType {\n            kind\n            name\n            ofType {\n              kind\n              name\n              ofType {\n                kind\n                name\n                ofType {\n                  kind\n                  name\n                  ofType {\n                    kind\n                    name\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  "}
+2025-02-24 13:48:49,203 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 405 | Time: 0.00s
+2025-02-24 13:48:49,220 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: POST http://127.0.0.1:5000/api/options/ | Body: {"query":"\n    query IntrospectionQuery {\n      __schema {\n        \n        queryType { name }\n        mutationType { name }\n        subscriptionType { name }\n        types {\n          ...FullType\n        }\n        directives {\n          name\n          description\n          \n          locations\n          args {\n            ...InputValue\n          }\n        }\n      }\n    }\n\n    fragment FullType on __Type {\n      kind\n      name\n      description\n      \n      fields(includeDeprecated: true) {\n        name\n        description\n        args {\n          ...InputValue\n        }\n        type {\n          ...TypeRef\n        }\n        isDeprecated\n        deprecationReason\n      }\n      inputFields {\n        ...InputValue\n      }\n      interfaces {\n        ...TypeRef\n      }\n      enumValues(includeDeprecated: true) {\n        name\n        description\n        isDeprecated\n        deprecationReason\n      }\n      possibleTypes {\n        ...TypeRef\n      }\n    }\n\n    fragment InputValue on __InputValue {\n      name\n      description\n      type { ...TypeRef }\n      defaultValue\n      \n      \n    }\n\n    fragment TypeRef on __Type {\n      kind\n      name\n      ofType {\n        kind\n        name\n        ofType {\n          kind\n          name\n          ofType {\n            kind\n            name\n            ofType {\n              kind\n              name\n              ofType {\n                kind\n                name\n                ofType {\n                  kind\n                  name\n                  ofType {\n                    kind\n                    name\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  "}
+2025-02-24 13:48:49,224 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 405 | Time: 0.00s
+2025-02-24 13:49:27,560 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-24 13:49:27,577 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.02s
+2025-02-24 14:04:36,627 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: PUT http://127.0.0.1:5000/api/options/ | Body: {
+    "name": "Наиглавнейший сервер АУФ2222",
+    "project_id": 1315
+}
+2025-02-24 14:14:05,373 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-24 14:14:05,512 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-24 14:14:05,568 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-24 14:14:09,640 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: PUT http://127.0.0.1:5000/api/options/ | Body: {
+    "name": "Наиглавнейший сервер АУФ2222",
+    "project_id": 1315
+}
+2025-02-24 16:20:22,324 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-24 16:20:22,455 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-24 16:20:22,506 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-24 16:20:31,598 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-24 16:20:56,804 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-24 16:22:03,679 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-24 16:22:03,808 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-24 16:22:03,852 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-24 16:22:38,877 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-24 16:23:11,675 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-24 16:23:15,525 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-25 10:37:40,843 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 10:37:40,990 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 10:37:41,053 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 10:38:39,595 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-25 10:40:03,412 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 10:40:03,513 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 10:40:03,551 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 10:46:05,125 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-25 10:46:16,755 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-25 10:46:48,724 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 31.97s
+2025-02-25 10:47:21,180 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 10:47:21,302 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 10:47:21,335 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 10:47:28,252 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-25 10:47:32,929 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 4.68s
+2025-02-25 10:47:47,556 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: PUT http://127.0.0.1:5000/api/options/ | Body: {
+    "name": "Наиглавнейший сервер АУФ2222",
+    "project_id": 1315
+}
+2025-02-25 10:49:00,256 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: PUT http://127.0.0.1:5000/api/options/ | Body: {
+    "name": "Наиглавнейший сервер АУФ2222",
+    "project_id": 1315
+}
+2025-02-25 10:50:23,576 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 10:50:23,715 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 10:50:23,764 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 10:56:43,615 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: PUT http://127.0.0.1:5000/api/options/ | Body: {
+    "name": "Наиглавнейший сервер АУФ2222",
+    "project_id": 1315
+}
+2025-02-25 10:59:32,145 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 10:59:32,284 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 10:59:32,334 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 10:59:36,435 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: PUT http://127.0.0.1:5000/api/options/ | Body: {
+    "name": "Наиглавнейший сервер АУФ2222",
+    "project_id": 1315
+}
+2025-02-25 11:00:45,530 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-25 11:00:45,537 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 11:39:14,710 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 11:39:14,871 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 11:39:14,922 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 11:39:16,009 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-25 11:39:16,124 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.12s
+2025-02-25 11:39:18,833 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-25 11:39:18,840 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 11:39:26,547 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: PUT http://127.0.0.1:5000/api/options/ | Body: {
+    "name": "Наиглавнейший сервер АУФ",
+    "project_id": 1315
+}
+2025-02-25 11:39:26,571 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.02s
+2025-02-25 11:39:30,768 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-25 11:39:30,776 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 11:49:23,186 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 11:49:23,295 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 11:49:23,339 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 11:49:23,355 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://127.0.0.1:5000/api/options/ | Body: None
+2025-02-25 13:39:56,084 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 13:39:56,188 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 13:39:56,237 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 13:40:37,306 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 13:40:37,419 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 13:40:37,467 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 13:40:37,486 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: OPTIONS http://localhost:5000/api/user | Body: None
+2025-02-25 13:40:37,489 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 13:40:37,495 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/user | Body: None
+2025-02-25 13:40:37,501 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 401 | Time: 0.01s
+2025-02-25 13:40:42,164 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: POST http://localhost:5000/api/login | Body: -----------------------------365688376121934786421114645886
+Content-Disposition: form-data; name="username"
+
+admin
+-----------------------------365688376121934786421114645886
+Content-Disposition: form-data; name="password"
+
+proadmin
+-----------------------------365688376121934786421114645886--
+
+2025-02-25 13:40:42,430 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.27s
+2025-02-25 13:40:42,445 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/user | Body: None
+2025-02-25 13:40:42,522 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.08s
+2025-02-25 13:40:42,605 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: OPTIONS http://localhost:5000/api/options/ | Body: None
+2025-02-25 13:40:42,608 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 13:40:42,655 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 13:40:42,667 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 13:40:45,538 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 13:40:45,549 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 13:40:50,669 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users | Body: None
+2025-02-25 13:40:50,671 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 13:40:50,680 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: POST http://localhost:5000/api/v1/users | Body: {"name":"Наиглавнейший сервер АУФ2323","project_id":1315}
+2025-02-25 13:40:50,682 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 307 | Time: 0.00s
+2025-02-25 13:40:50,694 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users/ | Body: None
+2025-02-25 13:40:50,695 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 13:40:50,742 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: POST http://localhost:5000/api/v1/users/ | Body: {"name":"Наиглавнейший сервер АУФ2323","project_id":1315}
+2025-02-25 13:40:50,766 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 422 | Time: 0.02s
+2025-02-25 13:41:50,356 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: POST http://localhost:5000/api/v1/users | Body: {"name":"Наиглавнейший сервер АУФ2323","project_id":1315}
+2025-02-25 13:41:50,360 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 307 | Time: 0.00s
+2025-02-25 13:41:50,535 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: POST http://localhost:5000/api/v1/users/ | Body: {"name":"Наиглавнейший сервер АУФ2323","project_id":1315}
+2025-02-25 13:41:50,544 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 422 | Time: 0.01s
+2025-02-25 13:41:51,276 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 13:41:51,287 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 13:41:57,209 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: OPTIONS http://localhost:5000/api/options/ | Body: None
+2025-02-25 13:41:57,211 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 13:41:57,220 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: PUT http://localhost:5000/api/options/ | Body: {"name":"Наиглавнейший сервер АУФ222","project_id":1315}
+2025-02-25 13:41:57,237 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.02s
+2025-02-25 13:41:59,508 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: OPTIONS http://localhost:5000/api/v1/projects | Body: None
+2025-02-25 13:41:59,511 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 13:41:59,524 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/v1/projects | Body: None
+2025-02-25 13:41:59,527 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 307 | Time: 0.00s
+2025-02-25 13:41:59,547 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: OPTIONS http://localhost:5000/api/v1/projects/ | Body: None
+2025-02-25 13:41:59,548 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 13:41:59,594 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/v1/projects/ | Body: None
+2025-02-25 13:41:59,636 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.04s
+2025-02-25 13:42:00,346 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 13:42:00,357 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 13:42:01,320 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/v1/projects | Body: None
+2025-02-25 13:42:01,323 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 307 | Time: 0.00s
+2025-02-25 13:42:01,334 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/v1/projects/ | Body: None
+2025-02-25 13:42:01,346 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 14:09:49,197 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: OPTIONS http://localhost:5000/api/options/ | Body: None
+2025-02-25 14:09:49,198 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 14:09:49,209 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 14:09:49,219 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 14:22:08,746 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: OPTIONS http://localhost:5000/api/user | Body: None
+2025-02-25 14:22:08,749 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 14:22:09,071 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/user | Body: None
+2025-02-25 14:22:09,081 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 14:22:09,256 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: OPTIONS http://localhost:5000/api/options/ | Body: None
+2025-02-25 14:22:09,258 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 14:22:09,270 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 14:22:09,281 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 14:23:52,128 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 14:23:52,134 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 14:23:52,775 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/user | Body: None
+2025-02-25 14:23:52,781 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 14:23:53,421 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: OPTIONS http://localhost:5000/api/options/ | Body: None
+2025-02-25 14:23:53,422 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 14:23:53,540 [spread_auth.core.middleware        .dispatch       :(  17)] INFO - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 14:23:53,551 [spread_auth.core.middleware        .dispatch       :(  24)] INFO - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 14:35:08,917 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 14:35:09,081 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 14:35:09,142 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 14:54:07,995 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/user | Body: None
+2025-02-25 14:54:08,004 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 14:54:08,189 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/user | Body: None
+2025-02-25 14:54:08,327 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.14s
+2025-02-25 14:54:08,457 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/options/ | Body: None
+2025-02-25 14:54:08,459 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 14:54:08,471 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 14:54:08,478 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 15:04:26,108 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/options/ | Body: None
+2025-02-25 15:04:26,109 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 15:04:26,116 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 15:04:26,126 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 15:04:28,869 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/load_equipment/ | Body: None
+2025-02-25 15:04:28,870 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 15:04:28,882 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: PUT http://localhost:5000/api/load_equipment/ | Body: None
+2025-02-25 15:04:28,886 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 404 | Time: 0.00s
+2025-02-25 15:04:54,352 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 15:04:54,358 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 15:07:30,127 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 15:07:30,250 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 15:07:30,290 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 15:07:30,304 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 15:07:30,305 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/equipment/load/ | Body: None
+2025-02-25 15:07:30,312 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 15:07:30,321 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: POST http://localhost:5000/api/equipment/load/ | Body: None
+2025-02-25 15:07:30,323 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 404 | Time: 0.00s
+2025-02-25 15:07:30,419 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.12s
+2025-02-25 15:08:03,836 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 15:08:03,963 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 15:08:04,006 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 15:08:12,574 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/user | Body: None
+2025-02-25 15:08:12,577 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 15:08:12,635 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/user | Body: None
+2025-02-25 15:08:12,771 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.14s
+2025-02-25 15:08:12,867 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 15:08:12,877 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 15:08:14,496 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: POST http://localhost:5000/api/equipment/load/ | Body: None
+2025-02-25 15:08:14,505 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 500 | Time: 0.01s
+2025-02-25 15:08:47,539 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 15:08:47,693 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 15:08:47,741 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 15:09:35,147 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 15:09:35,275 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 15:09:35,312 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 15:10:21,164 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 15:10:21,284 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 15:10:21,339 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 15:10:21,355 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: POST http://localhost:5000/api/equipment/load/ | Body: None
+2025-02-25 15:10:21,356 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: POST http://localhost:5000/api/equipment/load/ | Body: None
+2025-02-25 15:10:44,674 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 15:10:44,801 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 15:10:44,838 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 15:10:46,491 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/user | Body: None
+2025-02-25 15:10:46,613 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.12s
+2025-02-25 15:10:46,732 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 15:10:46,746 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 15:10:49,849 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/equipment/load/ | Body: None
+2025-02-25 15:10:49,850 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 15:10:49,857 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: POST http://localhost:5000/api/equipment/load/ | Body: None
+2025-02-25 15:10:49,865 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-25 16:20:12,581 [spread_auth.core.db                .init_db        :(  36)] INFO - init_db dbname: auth
+2025-02-25 16:20:12,731 [spread_auth.core.db                .init_db        :(  46)] INFO - init_db migrate run
+2025-02-25 16:20:12,790 [spread_auth.core.db                .init_db        :(  52)] INFO - init_db migrate end
+2025-02-25 16:20:12,817 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/options/ | Body: None
+2025-02-25 16:20:12,821 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-25 16:20:12,832 [spread_auth.core.middleware        .dispatch       :(  17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-25 16:20:12,976 [spread_auth.core.middleware        .dispatch       :(  24)] DEBUG - ⤊ Response: 200 | Time: 0.14s
+2025-02-25 16:35:36,364 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-25 16:35:36,488 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-25 16:35:36,534 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-25 16:41:06,750 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-25 16:41:06,871 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-25 16:41:06,901 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-25 16:44:49,620 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-25 16:44:49,740 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-25 16:44:49,782 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 14:13:23,727 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 14:13:23,828 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 14:13:23,878 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 14:40:13,875 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 14:40:14,016 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 14:40:14,073 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 14:42:08,880 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 14:42:08,997 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 500 | Time: 0.12s
+2025-02-26 14:53:05,048 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 14:55:30,690 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 14:55:30,825 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 14:55:30,875 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 15:01:07,342 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 15:01:47,057 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 15:01:47,175 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 15:01:47,207 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 15:05:28,603 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 15:06:24,268 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 15:08:53,536 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 15:08:53,660 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 15:08:53,688 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 16:08:08,535 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 16:08:21,191 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 16:09:16,942 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 16:09:17,080 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 16:09:17,124 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 16:09:21,362 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 16:10:01,195 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 16:10:01,317 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 16:10:01,365 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 16:10:02,485 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 16:10:22,743 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 16:13:12,652 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 16:13:12,779 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 16:13:12,812 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 16:22:45,744 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 16:23:51,639 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 16:23:51,738 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 16:23:51,773 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 16:23:55,593 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 16:24:34,526 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 16:24:34,659 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 16:24:34,690 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 16:24:42,465 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 16:26:36,271 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 16:26:36,406 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 16:26:36,449 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 16:41:18,849 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-26 16:44:14,852 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-26 16:44:14,980 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-26 16:44:15,034 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-26 16:44:18,612 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 10:32:27,780 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 10:32:27,919 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 10:32:27,981 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 10:32:36,889 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 10:32:58,703 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 10:32:58,805 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 10:32:58,852 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 10:33:02,221 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 10:35:16,794 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 10:35:16,907 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 10:35:16,983 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 10:35:18,558 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 10:36:06,655 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 10:38:20,903 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 10:38:21,001 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 10:38:21,058 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 10:38:29,786 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 10:39:18,025 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 10:39:18,153 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 10:39:18,190 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 10:39:20,313 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 10:40:13,930 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 10:41:43,035 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 10:41:43,127 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 10:41:43,184 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 10:41:44,200 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 10:44:53,232 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 10:44:53,364 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 10:44:53,420 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 10:47:38,303 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 10:48:57,806 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 10:48:57,904 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 10:48:57,962 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 10:52:17,671 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 10:53:47,838 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 10:53:47,954 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 10:53:47,986 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 10:53:52,708 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 14:02:36,072 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 14:02:36,229 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 14:02:36,282 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 14:07:47,295 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 14:07:47,311 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 401 | Time: 0.02s
+2025-02-27 14:08:19,049 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/login/ | Body: ----------------------------354282800590890693630794
+Content-Disposition: form-data; name="username"
+
+admin
+----------------------------354282800590890693630794
+Content-Disposition: form-data; name="password"
+
+proadmin
+----------------------------354282800590890693630794--
+
+2025-02-27 14:08:19,050 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-27 14:08:19,054 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/login | Body: ----------------------------051520255710144837661706
+Content-Disposition: form-data; name="username"
+
+admin
+----------------------------051520255710144837661706
+Content-Disposition: form-data; name="password"
+
+proadmin
+----------------------------051520255710144837661706--
+
+2025-02-27 14:08:19,346 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.29s
+2025-02-27 14:09:58,825 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 14:11:10,793 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 14:11:10,919 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 14:11:10,957 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 14:11:14,644 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 14:11:24,200 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 9.56s
+2025-02-27 14:29:51,000 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 14:29:51,141 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 14:29:51,198 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 14:49:06,977 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 14:49:07,108 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 14:49:07,165 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 14:49:21,044 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 14:49:21,178 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 14:49:21,218 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 15:54:29,539 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 15:54:29,667 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 15:54:29,718 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 15:54:46,056 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users | Body: None
+2025-02-27 15:54:46,066 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-27 15:54:46,090 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users | Body: None
+2025-02-27 15:54:46,094 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-27 15:54:46,175 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users/ | Body: None
+2025-02-27 15:54:46,176 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-27 15:54:46,180 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-27 15:54:46,295 [spread_auth.api.v1.user            .get_users      :(21)] INFO - get_users filters: None
+2025-02-27 15:54:46,301 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.12s
+2025-02-27 15:54:47,959 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users/3 | Body: None
+2025-02-27 15:54:47,960 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-27 15:54:47,968 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users/3 | Body: None
+2025-02-27 15:54:47,992 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.03s
+2025-02-27 15:55:05,474 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users | Body: None
+2025-02-27 15:55:05,476 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-27 15:55:05,504 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-27 15:55:05,517 [spread_auth.api.v1.user            .get_users      :(21)] INFO - get_users filters: None
+2025-02-27 15:55:05,523 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-27 15:55:08,046 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users/2 | Body: None
+2025-02-27 15:55:08,048 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-27 15:55:08,065 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users/2 | Body: None
+2025-02-27 15:55:08,077 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-27 15:55:12,921 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/with_count/ | Body: None
+2025-02-27 15:55:12,922 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-27 15:55:12,931 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/with_count/ | Body: None
+2025-02-27 15:55:12,953 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-27 15:55:14,971 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1/ | Body: None
+2025-02-27 15:55:14,979 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-27 15:55:14,987 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/projects/with_count/ | Body: None
+2025-02-27 15:55:14,989 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-27 15:55:15,035 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/ | Body: None
+2025-02-27 15:55:15,037 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-27 15:55:15,039 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/projects/with_count/ | Body: None
+2025-02-27 15:55:15,088 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.05s
+2025-02-27 15:55:15,191 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1 | Body: None
+2025-02-27 15:55:15,192 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-27 15:55:15,331 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1 | Body: None
+2025-02-27 15:55:15,347 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-27 15:55:15,451 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1/permissions?project=1315 | Body: None
+2025-02-27 15:55:15,452 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-27 15:55:15,458 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/permissions?project=1315 | Body: None
+2025-02-27 15:55:15,487 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.03s
+2025-02-27 15:55:17,040 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1/permissions?project=1493 | Body: None
+2025-02-27 15:55:17,043 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-27 15:55:17,090 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/permissions?project=1493 | Body: None
+2025-02-27 15:55:17,119 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.03s
+2025-02-27 15:55:17,864 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1/permissions?project=1111 | Body: None
+2025-02-27 15:55:17,865 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-27 15:55:17,910 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/permissions?project=1111 | Body: None
+2025-02-27 15:55:17,932 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-27 15:56:53,721 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 15:56:53,854 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 15:56:53,883 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 15:56:59,384 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-27 15:58:06,990 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-27 15:58:07,129 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-27 15:58:07,158 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-27 15:58:08,940 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/entity/load/ | Body: None
+2025-02-28 10:13:39,712 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/docs | Body: None
+2025-02-28 10:13:39,718 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 10:13:40,861 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/v1/openapi.json | Body: None
+2025-02-28 10:13:40,969 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.11s
+2025-02-28 10:54:22,331 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-28 10:54:22,442 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-28 10:54:22,487 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-28 10:54:23,556 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://localhost:5000/api/login | Body: grant_type=password&username=admin&password=proadmin
+2025-02-28 10:54:23,886 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.33s
+2025-02-28 10:54:31,200 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/docs | Body: None
+2025-02-28 10:54:31,201 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 10:54:31,786 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/v1/openapi.json | Body: None
+2025-02-28 10:54:31,897 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.11s
+2025-02-28 10:54:40,635 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://localhost:5000/api/login | Body: grant_type=password&username=admin&password=proadmin
+2025-02-28 10:54:40,886 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.25s
+2025-02-28 10:54:49,121 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/locations/ | Body: None
+2025-02-28 10:55:36,353 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-28 10:55:36,475 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-28 10:55:36,530 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-28 10:55:40,468 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/locations/ | Body: None
+2025-02-28 10:57:40,635 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-28 10:57:40,775 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-28 10:57:40,831 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-28 10:57:42,970 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations | Body: None
+2025-02-28 10:57:42,974 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 10:57:42,980 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations/ | Body: None
+2025-02-28 10:57:53,257 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations | Body: None
+2025-02-28 10:57:53,260 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 10:57:53,267 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations/ | Body: None
+2025-02-28 10:58:43,185 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-28 10:58:43,302 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-28 10:58:43,328 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-28 10:58:46,271 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations | Body: None
+2025-02-28 10:58:46,280 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.01s
+2025-02-28 10:58:46,286 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations/ | Body: None
+2025-02-28 11:00:14,926 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-28 11:00:15,062 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-28 11:00:15,114 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-28 11:00:16,367 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations | Body: None
+2025-02-28 11:00:16,376 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.01s
+2025-02-28 11:00:16,383 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations/ | Body: None
+2025-02-28 11:00:20,083 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 3.70s
+2025-02-28 11:01:36,317 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations | Body: None
+2025-02-28 11:01:36,319 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 11:01:36,323 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations/ | Body: None
+2025-02-28 11:01:39,001 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 2.68s
+2025-02-28 11:01:42,696 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-28 11:01:42,807 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-28 11:01:42,840 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-28 11:01:45,487 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations | Body: None
+2025-02-28 11:01:45,495 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.01s
+2025-02-28 11:01:45,501 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations/ | Body: None
+2025-02-28 11:01:48,115 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 2.61s
+2025-02-28 11:23:25,922 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-28 11:23:26,049 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-28 11:23:26,093 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-28 14:25:38,605 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations | Body: None
+2025-02-28 14:25:38,612 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.01s
+2025-02-28 14:25:38,619 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations/ | Body: None
+2025-02-28 14:25:49,203 [spread_auth.core.db                .init_db        :(36)] INFO - init_db dbname: auth
+2025-02-28 14:25:49,342 [spread_auth.core.db                .init_db        :(46)] INFO - init_db migrate run
+2025-02-28 14:25:49,369 [spread_auth.core.db                .init_db        :(52)] INFO - init_db migrate end
+2025-02-28 14:25:52,464 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations | Body: None
+2025-02-28 14:25:52,474 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.01s
+2025-02-28 14:25:52,481 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/locations/ | Body: None
+2025-02-28 14:25:52,618 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.14s
+2025-02-28 14:26:24,376 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/type_subginery | Body: None
+2025-02-28 14:26:24,379 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 14:26:24,385 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/type_subginery/ | Body: None
+2025-02-28 14:26:24,404 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 14:26:39,320 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/type_enginery | Body: None
+2025-02-28 14:26:39,322 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 14:26:39,329 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/type_enginery/ | Body: None
+2025-02-28 14:26:39,346 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 14:26:55,011 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/enginery | Body: None
+2025-02-28 14:26:55,015 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 14:26:55,023 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/enginery/ | Body: None
+2025-02-28 14:26:55,037 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 14:27:04,263 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/type_enginery | Body: None
+2025-02-28 14:27:04,265 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 14:27:04,271 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/type_enginery/ | Body: None
+2025-02-28 14:27:04,283 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 14:27:19,734 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/type_enginery | Body: None
+2025-02-28 14:27:19,735 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 14:27:19,739 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://127.0.0.1:5000/api/entity/type_enginery/ | Body: None
+2025-02-28 14:27:19,752 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:33:51,445 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/user | Body: None
+2025-02-28 15:33:51,446 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 15:33:51,531 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/user | Body: None
+2025-02-28 15:33:51,535 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 401 | Time: 0.00s
+2025-02-28 15:33:57,176 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://localhost:5000/api/login | Body: -----------------------------34959849142592531739902388824
+Content-Disposition: form-data; name="username"
+
+admin
+-----------------------------34959849142592531739902388824
+Content-Disposition: form-data; name="password"
+
+5;mJiHLejEz)CbL
+-----------------------------34959849142592531739902388824--
+
+2025-02-28 15:33:57,439 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 401 | Time: 0.26s
+2025-02-28 15:34:02,979 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://localhost:5000/api/login | Body: -----------------------------4811382722034606391632592161
+Content-Disposition: form-data; name="username"
+
+admin
+-----------------------------4811382722034606391632592161
+Content-Disposition: form-data; name="password"
+
+proadmin
+-----------------------------4811382722034606391632592161--
+
+2025-02-28 15:34:03,208 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.23s
+2025-02-28 15:34:03,229 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/user | Body: None
+2025-02-28 15:34:03,236 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:34:03,625 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1/ | Body: None
+2025-02-28 15:34:03,627 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/locations | Body: None
+2025-02-28 15:34:03,628 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/type_subginery | Body: None
+2025-02-28 15:34:03,630 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/type_enginery | Body: None
+2025-02-28 15:34:03,631 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/enginery | Body: None
+2025-02-28 15:34:03,632 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/projects/with_count/ | Body: None
+2025-02-28 15:34:03,638 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:34:03,640 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:34:03,641 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:34:03,643 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:34:03,645 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:34:03,646 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:34:03,698 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/ | Body: None
+2025-02-28 15:34:03,704 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.01s
+2025-02-28 15:34:03,714 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/locations | Body: None
+2025-02-28 15:34:03,716 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_subginery | Body: None
+2025-02-28 15:34:03,717 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_enginery | Body: None
+2025-02-28 15:34:03,720 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/enginery | Body: None
+2025-02-28 15:34:03,722 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/projects/with_count/ | Body: None
+2025-02-28 15:34:03,733 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.02s
+2025-02-28 15:34:03,734 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.02s
+2025-02-28 15:34:03,735 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.02s
+2025-02-28 15:34:03,736 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.02s
+2025-02-28 15:34:03,761 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.04s
+2025-02-28 15:34:03,795 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1 | Body: None
+2025-02-28 15:34:03,796 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 15:34:03,882 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1 | Body: None
+2025-02-28 15:34:03,898 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/locations/ | Body: None
+2025-02-28 15:34:03,904 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/type_subginery/ | Body: None
+2025-02-28 15:34:03,905 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/type_enginery/ | Body: None
+2025-02-28 15:34:03,907 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/enginery/ | Body: None
+2025-02-28 15:34:03,912 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:34:03,916 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:34:03,918 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:34:03,921 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 15:34:03,926 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.04s
+2025-02-28 15:34:03,968 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/locations/ | Body: None
+2025-02-28 15:34:03,975 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_subginery/ | Body: None
+2025-02-28 15:34:03,977 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_enginery/ | Body: None
+2025-02-28 15:34:03,989 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/enginery/ | Body: None
+2025-02-28 15:34:04,087 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1/permissions?project=1315 | Body: None
+2025-02-28 15:34:04,129 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.04s
+2025-02-28 15:34:04,132 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.16s
+2025-02-28 15:34:04,137 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/permissions?project=1315 | Body: None
+2025-02-28 15:34:04,291 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.15s
+2025-02-28 15:34:04,324 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.35s
+2025-02-28 15:34:04,339 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.36s
+2025-02-28 15:34:04,345 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.36s
+2025-02-28 15:34:16,855 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users | Body: None
+2025-02-28 15:34:16,856 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 15:34:16,862 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users | Body: None
+2025-02-28 15:34:16,863 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 15:34:16,883 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users/ | Body: None
+2025-02-28 15:34:16,884 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 15:34:16,982 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-28 15:34:16,991 [spread_auth.api.v1.user            .get_users      :(21)] INFO - get_users filters: None
+2025-02-28 15:34:17,001 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 15:34:18,906 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/with_count/ | Body: None
+2025-02-28 15:34:18,907 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 15:34:18,913 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/with_count/ | Body: None
+2025-02-28 15:34:18,981 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.07s
+2025-02-28 15:34:19,677 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/ | Body: None
+2025-02-28 15:34:19,681 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 15:34:19,689 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/projects/with_count/ | Body: None
+2025-02-28 15:34:19,691 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/locations | Body: None
+2025-02-28 15:34:19,692 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_subginery | Body: None
+2025-02-28 15:34:19,693 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_enginery | Body: None
+2025-02-28 15:34:19,694 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/enginery | Body: None
+2025-02-28 15:34:19,709 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.02s
+2025-02-28 15:34:19,711 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.02s
+2025-02-28 15:34:19,712 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.02s
+2025-02-28 15:34:19,713 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.02s
+2025-02-28 15:34:19,714 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1 | Body: None
+2025-02-28 15:34:19,731 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 15:34:19,741 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.05s
+2025-02-28 15:34:19,767 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/locations/ | Body: None
+2025-02-28 15:34:19,783 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_subginery/ | Body: None
+2025-02-28 15:34:19,792 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_enginery/ | Body: None
+2025-02-28 15:34:19,801 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/enginery/ | Body: None
+2025-02-28 15:34:19,805 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.04s
+2025-02-28 15:34:19,818 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.03s
+2025-02-28 15:34:19,820 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.03s
+2025-02-28 15:34:19,824 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 15:34:19,876 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/permissions?project=1315 | Body: None
+2025-02-28 15:34:19,904 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.03s
+2025-02-28 15:38:21,099 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1/permissions?project=1111 | Body: None
+2025-02-28 15:38:21,100 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 15:38:21,108 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/permissions?project=1111 | Body: None
+2025-02-28 15:38:21,132 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 15:38:26,924 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1/permissions?project=1493 | Body: None
+2025-02-28 15:38:26,927 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 15:38:26,938 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/permissions?project=1493 | Body: None
+2025-02-28 15:38:26,954 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 16:01:47,525 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users | Body: None
+2025-02-28 16:01:47,527 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 16:01:47,544 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users | Body: None
+2025-02-28 16:01:47,546 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 16:01:47,588 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users/ | Body: None
+2025-02-28 16:01:47,590 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 16:01:47,597 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-28 16:01:47,604 [spread_auth.api.v1.user            .get_users      :(21)] INFO - get_users filters: None
+2025-02-28 16:01:47,609 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:01:48,184 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/with_count/ | Body: None
+2025-02-28 16:01:48,187 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 16:01:48,224 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/with_count/ | Body: None
+2025-02-28 16:01:48,236 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:01:49,246 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users | Body: None
+2025-02-28 16:01:49,250 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 16:01:49,269 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-28 16:01:49,275 [spread_auth.api.v1.user            .get_users      :(21)] INFO - get_users filters: None
+2025-02-28 16:01:49,282 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:01:51,350 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/options/ | Body: None
+2025-02-28 16:01:51,353 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 16:01:51,361 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/options/ | Body: None
+2025-02-28 16:01:51,373 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:01:53,189 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/projects | Body: None
+2025-02-28 16:01:53,191 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 16:01:53,206 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/projects | Body: None
+2025-02-28 16:01:53,208 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 16:01:53,242 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/projects/ | Body: None
+2025-02-28 16:01:53,243 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 16:01:53,249 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/projects/ | Body: None
+2025-02-28 16:01:53,264 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 16:01:54,442 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/projects/3 | Body: None
+2025-02-28 16:01:54,444 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 16:01:54,455 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/projects/3 | Body: None
+2025-02-28 16:01:54,474 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 16:02:24,821 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users | Body: None
+2025-02-28 16:02:24,824 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 16:02:24,841 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-28 16:02:24,848 [spread_auth.api.v1.user            .get_users      :(21)] INFO - get_users filters: None
+2025-02-28 16:02:24,854 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:26,073 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users/3 | Body: None
+2025-02-28 16:02:26,075 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 16:02:26,089 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users/3 | Body: None
+2025-02-28 16:02:26,106 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 16:02:27,776 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users | Body: None
+2025-02-28 16:02:27,778 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 16:02:27,799 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users/ | Body: None
+2025-02-28 16:02:27,808 [spread_auth.api.v1.user            .get_users      :(21)] INFO - get_users filters: None
+2025-02-28 16:02:27,814 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 16:02:28,666 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/users/2 | Body: None
+2025-02-28 16:02:28,668 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 16:02:28,674 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/users/2 | Body: None
+2025-02-28 16:02:28,678 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 16:02:30,586 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/with_count/ | Body: None
+2025-02-28 16:02:30,611 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 16:02:31,497 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1/ | Body: None
+2025-02-28 16:02:31,499 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.00s
+2025-02-28 16:02:31,506 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/projects/with_count/ | Body: None
+2025-02-28 16:02:31,507 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/locations | Body: None
+2025-02-28 16:02:31,509 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/type_subginery | Body: None
+2025-02-28 16:02:31,510 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/type_enginery | Body: None
+2025-02-28 16:02:31,511 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/enginery | Body: None
+2025-02-28 16:02:31,517 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/ | Body: None
+2025-02-28 16:02:31,518 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:31,520 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:31,522 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:31,523 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:31,525 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:31,528 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.01s
+2025-02-28 16:02:31,540 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/projects/with_count/ | Body: None
+2025-02-28 16:02:31,544 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/locations | Body: None
+2025-02-28 16:02:31,545 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_subginery | Body: None
+2025-02-28 16:02:31,551 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_enginery | Body: None
+2025-02-28 16:02:31,551 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/enginery | Body: None
+2025-02-28 16:02:31,552 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.01s
+2025-02-28 16:02:31,553 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.01s
+2025-02-28 16:02:31,556 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.01s
+2025-02-28 16:02:31,557 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.01s
+2025-02-28 16:02:31,574 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.03s
+2025-02-28 16:02:31,636 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1 | Body: None
+2025-02-28 16:02:31,642 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/locations/ | Body: None
+2025-02-28 16:02:31,643 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/type_subginery/ | Body: None
+2025-02-28 16:02:31,644 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/type_enginery/ | Body: None
+2025-02-28 16:02:31,645 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/entity/enginery/ | Body: None
+2025-02-28 16:02:31,649 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:31,653 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:31,655 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:31,657 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:31,659 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:31,667 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1 | Body: None
+2025-02-28 16:02:31,681 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/locations/ | Body: None
+2025-02-28 16:02:31,682 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_subginery/ | Body: None
+2025-02-28 16:02:31,683 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/type_enginery/ | Body: None
+2025-02-28 16:02:31,685 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/entity/enginery/ | Body: None
+2025-02-28 16:02:31,716 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.05s
+2025-02-28 16:02:31,764 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: OPTIONS http://localhost:5000/api/v1/roles/1/permissions?project=1315 | Body: None
+2025-02-28 16:02:31,766 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.09s
+2025-02-28 16:02:31,770 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.09s
+2025-02-28 16:02:31,771 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.01s
+2025-02-28 16:02:31,773 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.09s
+2025-02-28 16:02:31,793 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.11s
+2025-02-28 16:02:31,798 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: GET http://localhost:5000/api/v1/roles/1/permissions?project=1315 | Body: None
+2025-02-28 16:02:31,816 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.02s
+2025-02-28 16:03:41,845 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/login/ | Body: ----------------------------664123842247676793303132
+Content-Disposition: form-data; name="username"
+
+admin
+----------------------------664123842247676793303132
+Content-Disposition: form-data; name="password"
+
+proadmin
+----------------------------664123842247676793303132--
+
+2025-02-28 16:03:41,846 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 307 | Time: 0.00s
+2025-02-28 16:03:41,851 [spread_auth.core.middleware        .dispatch       :(17)] DEBUG - ⤋ Request: POST http://127.0.0.1:5000/api/login | Body: ----------------------------390222159165027762613367
+Content-Disposition: form-data; name="username"
+
+admin
+----------------------------390222159165027762613367
+Content-Disposition: form-data; name="password"
+
+proadmin
+----------------------------390222159165027762613367--
+
+2025-02-28 16:03:42,068 [spread_auth.core.middleware        .dispatch       :(24)] DEBUG - ⤊ Response: 200 | Time: 0.22s
