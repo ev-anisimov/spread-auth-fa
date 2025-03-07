@@ -1,30 +1,30 @@
 <template>
-  <div class="permission-item">
+  <div class="permission-item" :class="{ 'changed': hasChanges }">
     <select v-model="localPermission.locationId" class="form-control" @change="updateCode" :disabled="!isEditing">
-      <option v-for="loc in locations" :key="loc.obj_id" :value="loc.obj_id">
+      <option v-for="loc in locationList" :key="loc.obj_id" :value="loc.obj_id">
         {{ loc.obj_name }}
       </option>
     </select>
 
     <select v-model="localPermission.subsystemId" class="form-control" @change="updateCode" :disabled="!isEditing">
-      <option v-for="sub in typeSubginery" :key="sub.obj_id" :value="sub.obj_id">
+      <option v-for="sub in typeSubgineryList" :key="sub.obj_id" :value="sub.obj_id">
         {{ sub.obj_name }}
       </option>
     </select>
 
     <select v-model="localPermission.objectTypeId" class="form-control" @change="updateCode" :disabled="!isEditing">
-      <option v-for="type in typeEnginery" :key="type.obj_id" :value="type.obj_id">
+      <option v-for="type in typeEngineryList" :key="type.obj_id" :value="type.obj_id">
         {{ type.obj_name }}
       </option>
     </select>
 
     <select v-model="localPermission.engineerObjectId" class="form-control" @change="updateCode" :disabled="!isEditing">
-      <option v-for="eng in engineries" :key="eng.obj_id" :value="eng.obj_id">
+      <option v-for="eng in engineryList" :key="eng.obj_id" :value="eng.obj_id">
         {{ eng.obj_name }}
       </option>
     </select>
 
-    <select v-model="localPermission.access" class="form-control" @change="emitUpdate" :disabled="!isEditing">
+    <select v-model="localPermission.access" class="form-control" @change="emitUpdate()" :disabled="!isEditing">
       <option v-for="option in accessOptions" :key="option.value" :value="option.value">
         {{ option.label }}
       </option>
@@ -44,15 +44,15 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, defineProps, defineEmits } from "vue";
+import {ref, onMounted, defineProps, defineEmits, computed} from "vue";
 
 const props = defineProps({
   perm: Object,
-  locations: Array,
-  typeSubginery: Array,
-  typeEnginery: Array,
-  engineries: Array,
-  isEditing: Boolean,
+  locationList: Array,
+  typeSubgineryList: Array,
+  typeEngineryList: Array,
+  engineryList: Array,
+  isEditing: Boolean
 });
 
 const emit = defineEmits(["edit", "remove"]);
@@ -65,6 +65,7 @@ const localPermission = ref({
   objectTypeId: null,
   engineerObjectId: null,
   access: 0,
+  hasChanges:false
 });
 
 // 🔹 Варианты доступа
@@ -74,6 +75,7 @@ const accessOptions = [
   { value: 2, label: "Запрещено" },
 ];
 
+const hasChanges = computed(() => props.perm.hasChanges ||false);
 // 🔹 Разбираем `code` при инициализации
 onMounted(() => {
   if (props.perm) {
@@ -86,6 +88,7 @@ onMounted(() => {
         objectTypeId: parts[3] || null,
         engineerObjectId: parts[4] || null,
         access: props.perm.access ?? 0,
+        hasChanges: props.perm.hasChanges ?? false,
       };
     }
   }
@@ -93,15 +96,22 @@ onMounted(() => {
 
 // 🔹 Собираем `code` при изменении
 const updateCode = () => {
-  localPermission.value.projectId = props.perm.project;
   const newCode = `${localPermission.value.projectId}/${localPermission.value.locationId}/${localPermission.value.subsystemId}/${localPermission.value.objectTypeId}/${localPermission.value.engineerObjectId}`;
+  localPermission.value.projectId = props.perm.project;
+
+  // localPermission.value.hasChanges= JSON.stringify(localPermission) !== JSON.stringify(props.perm);
 
   emitUpdate(newCode);
 };
 
 // 🔹 Обновляем родительский компонент
 const emitUpdate = (newCode = null) => {
-  emit("edit", { ...props.perm, code: newCode || props.perm.code, access: localPermission.value.access });
+  emit("edit", {
+    ...props.perm,
+    code: newCode || props.perm.code,
+    access: localPermission.value.access,
+    // hasChanges: JSON.stringify(localPermission) !== JSON.stringify(props.perm),
+  });
 };
 
 // 🔹 Удаление permission
@@ -110,7 +120,7 @@ const removePermission = () => {
 };
 
 // 🔹 Следим за изменениями
-watch(localPermission, updateCode, { deep: true });
+// watch(localPermission, updateCode, { deep: true });
 
 </script>
 
@@ -123,6 +133,10 @@ watch(localPermission, updateCode, { deep: true });
   padding: 10px;
   border-bottom: 1px solid #dee2e6;
   align-items: center;
+}
+
+.permission-item.changed {
+  background-color: rgba(255, 193, 7, 0.3); /* Светло-жёлтый цвет */
 }
 
 /* Кнопки действий */

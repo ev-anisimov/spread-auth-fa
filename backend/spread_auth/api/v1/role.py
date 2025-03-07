@@ -1,14 +1,13 @@
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Body
 from sqlmodel import select, func
 from sqlmodel.ext.asyncio.session import AsyncSession
 from sqlalchemy.orm import selectinload
 
-from spread_auth.models import PermissionPublic
-from spread_auth.core.db import get_session, update_object, get_objects
+from spread_auth.core.db import get_session, update_object, get_objects, bulk_create_or_update
 from spread_auth.core.security import get_current_user, get_password_hash
-from spread_auth.models import Role, RoleBase, RolePublic, User, Permission,RolePermissionCnt, RolePermission
+from spread_auth.models import PermissionBase, Role, RoleBase, RolePublic, User, Permission, PermissionPublic, RolePermissionCnt, RolePermission
 
 router = APIRouter(prefix="/roles", tags=["Roles"])
 
@@ -44,7 +43,7 @@ async def get_role(
 )
 async def update_role(
         role_id: int,
-        role: RoleBase,
+        role: RolePermission,
         session: AsyncSession = Depends(get_session),
         current_user: User = Depends(get_current_user)
 ) -> RolePublic:
@@ -127,3 +126,29 @@ async def get_permissions_by_role(
         query = query.where(Permission.project == project)
     permissions = await session.exec(query)
     return permissions.all()
+
+
+
+
+@router.put(
+    "/{role_id}/permissions",
+    dependencies=[Depends(get_current_user)],
+    response_model=RolePublic
+)
+async def update_role(
+        role_id: int,
+        role: RoleBase,
+        permissions: list[PermissionBase]=Body(...),
+        session: AsyncSession = Depends(get_session),
+        current_user: User = Depends(get_current_user)
+) -> RolePublic:
+    try:
+        if not current_user.is_staff:
+            raise HTTPException(status_code=403, detail="Access denied")
+
+        extra_data = {'id': role_id}
+        db_user = await update_object(session, Role, role_id, role, extra_data)
+        _perm = await bulk_create_or_update(session, Permission, permissions)
+        return db_user
+    except Exception as ex:
+        raise HTTPException(status_code=500, detail=str(ex))

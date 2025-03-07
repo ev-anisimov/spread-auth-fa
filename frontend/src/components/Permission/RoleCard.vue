@@ -58,13 +58,14 @@
         <div class="role-list">
           <PermissionItem
               v-for="perm in projectPermissions"
-              :key="perm.id || `new-${perm.tempId}`"
+              :key="perm.id || perm.tempId"
               :perm="perm"
-              :locations="locations"
-              :typeSubginery="typeSubginery"
-              :typeEnginery="typeEnginery"
-              :engineries="engineries"
-              :isEditing="isEditing"
+              :location-list="locationList"
+              :typeSubginery-list="typeSubgineryList"
+              :typeEnginery-list="typeEngineryList"
+              :enginery-list="engineryList"
+              :is-editing="isEditing"
+              :has-changes="perm.hasChanges"
               @edit="editPermission"
               @remove="removePermission"
           />
@@ -96,7 +97,7 @@ const isEditing = ref(isNew.value);
 
 
 // Данные пользователя из API
-const role = reactive({
+const dbObject = reactive({
   id: null,
   name: "",
   permissions: [],
@@ -112,32 +113,17 @@ const localObject = reactive({
 // let permissionList = reactive([]);
 const errors = ref({}); // Ошибки валидации
 
-const locations = reactive([]);
-const typeSubginery = reactive([]);
-const typeEnginery = reactive([]);
-const engineries = reactive([]);
+const locationList = reactive([]);
+const typeSubgineryList = reactive([]);
+const typeEngineryList = reactive([]);
+const engineryList = reactive([]);
 
 const projects = reactive([]);
 let activeProjectId = ref(null);
 
 const cachedPermissions = reactive({});
+const origPermissions = reactive({});
 const projectPermissions = computed(() => cachedPermissions[activeProjectId.value] || []);
-
-// Добавление нового permission
-const addPermission = () => {
-  if (!cachedPermissions[activeProjectId.value]) {
-    cachedPermissions[activeProjectId.value] = [];
-  }
-
-  cachedPermissions[activeProjectId.value].push({
-    tempId: Date.now(),
-    project: activeProjectId.value,
-    code: `${activeProjectId.value}/null/null/null/null`,
-    access: 0,
-  });
-
-  checkForChanges();
-};
 
 // Переключение проекта
 const changeProject = async (projectId) => {
@@ -147,27 +133,57 @@ const changeProject = async (projectId) => {
   }
 };
 
+// Проверка изменений
+const checkForChanges = () => {
+
+  let roleChanged = JSON.stringify(dbObject) !== JSON.stringify(localObject);
+
+  let permissionsChanged = Object.values(cachedPermissions)
+      .some(permissions => permissions.some(perm => perm.hasChanges));
+  hasChanges.value = roleChanged || permissionsChanged;
+};
+
 // Загрузка permissions для проекта
 const fetchPermissionsForProject = async (projectId) => {
-  if (!role.id) return;
+  if (!dbObject.id) return;
   if (cachedPermissions[projectId]) return; // Если кеш есть — не загружаем заново
   if (!projectId) return;
 
   try {
-    const response = await axios.get(`/api/v1/roles/${role.id}/permissions?project=${projectId}`, {
+    const response = await axios.get(`/api/v1/roles/${dbObject.id}/permissions?project=${projectId}`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
-    cachedPermissions[projectId] = response.data; // Кешируем
+    cachedPermissions[projectId] = response.data.map(p => ({...p})); // Кешируем
+    origPermissions[projectId] = response.data.map(p => ({...p})); // Кешируем
   } catch (error) {
     notify(`Ошибка загрузки прав доступа для проекта ${projectId}: ${error}`, "error");
   }
+};
+
+// Добавление нового permission
+const addPermission = () => {
+  if (!cachedPermissions[activeProjectId.value]) {
+    cachedPermissions[activeProjectId.value] = [];
+  }
+
+  cachedPermissions[activeProjectId.value].push({
+    tempId: `new-${Date.now()}`,
+    project: activeProjectId.value,
+    code: `${activeProjectId.value}/null/null/null/null`,
+    access: 0,
+    role_id: dbObject.id,
+    id: null,
+    hasChanges: true,
+  });
+
+  checkForChanges();
 };
 
 // Удаление permission
 const removePermission = (perm) => {
   const projectId = perm.project;
   if (cachedPermissions[projectId]) {
-    cachedPermissions[projectId] = cachedPermissions[projectId].filter((p) => p.id !== perm.id && p.tempId !== perm.tempId);
+    cachedPermissions[projectId] = cachedPermissions[projectId].filter((p) => p.id !== perm.id);
     checkForChanges();
   }
 };
@@ -177,16 +193,24 @@ const editPermission = (updatedPerm) => {
   const projectId = updatedPerm.project;
   if (!cachedPermissions[projectId]) return;
 
-  const index = cachedPermissions[projectId].findIndex((p) => p.id === updatedPerm.id || p.tempId === updatedPerm.tempId);
+  const index = cachedPermissions[projectId].findIndex((p) => p.id === updatedPerm.id);
   if (index !== -1) {
-    cachedPermissions[projectId][index] = {...updatedPerm};
+    const origPerm = origPermissions[projectId].find((p) => p.id === updatedPerm.id);
+    const cachPerm = cachedPermissions[projectId][index];
+    let hasChanges;
+    if ((origPerm.code === updatedPerm.code) &&
+        (origPerm.access === updatedPerm.access) &&
+        (origPerm.index === updatedPerm.index)) {
+      hasChanges = false;
+    } else if ((cachPerm.code !== updatedPerm.code) ||
+        (cachPerm.access !== updatedPerm.access) ||
+        (cachPerm.index !== updatedPerm.index)) {
+      hasChanges = true;
+    }
+    cachedPermissions[projectId][index] = {...updatedPerm, hasChanges};
+
     checkForChanges();
   }
-};
-
-// Проверка изменений
-const checkForChanges = () => {
-  hasChanges.value = JSON.stringify(role) !== JSON.stringify(localObject);
 };
 
 // Загрузка роли
@@ -195,11 +219,11 @@ async function fetchRole() {
     const response = await axios.get(`/api/v1/roles/${route.params.id}/`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
-    Object.assign(role, response.data);
+    Object.assign(dbObject, response.data);
     Object.assign(localObject, response.data);
     setBreadcrumbs([
       {label: "Роли", url: "/roles"},
-      {label: role.name, url: `/roles/${role.id}`},
+      {label: dbObject.name, url: `/roles/${dbObject.id}`},
     ]);
     await fetchPermissionsForProject(activeProjectId.value);
   } catch (error) {
@@ -227,6 +251,13 @@ async function fetchEntities(collection, type) {
     const response = await axios.get(`/api/entity/${type}`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
+    collection.push({
+		"obj_name": "*",
+		"obj_type": type,
+		"id": '*',
+		"parent_id": null,
+		"obj_id": "*",
+		"updated_at": "2025-02-27T13:25:50.575900"})
     collection.push(...response.data);
   } catch (error) {
     notify(`Ошибка при получении ${error}`, "error", false);
@@ -240,22 +271,35 @@ async function saveChanges() {
     return;
   }
   try {
-    let response
-    const payload = {...localObject, permissions: []};
+    let response;
+    const allPermissions = [];
     for (const projectId in cachedPermissions) {
-      payload.permissions.push(...cachedPermissions[projectId]);
+      allPermissions.push(...cachedPermissions[projectId].find(p => p.hasChanges === true));
     }
+    const payload = {
+      role: {...localObject},
+      permissions: allPermissions
+    };
 
+    // if (isNew.value) {
+    //   response = await axios.post("/api/v1/roles", payload, {
+    //     headers: {Authorization: `Bearer ${authStore.token}`}
+    //   });
+    // } else {
+    //   response = await axios.put(`/api/v1/roles/${dbObject.id}`, payload, {
+    //     headers: {Authorization: `Bearer ${authStore.token}`}
+    //   });
+    // }
     if (isNew.value) {
       response = await axios.post("/api/v1/roles", payload, {
         headers: {Authorization: `Bearer ${authStore.token}`}
       });
     } else {
-      response = await axios.put(`/api/v1/roles/${role.id}`, payload, {
+      response = await axios.put(`/api/v1/roles/${dbObject.id}/permissions`, payload, {
         headers: {Authorization: `Bearer ${authStore.token}`}
       });
     }
-    Object.assign(role, response.data); // Обновляем оригинальные данные
+    Object.assign(dbObject, response.data); // Обновляем оригинальные данные
     Object.assign(localObject, response.data); // Синхронизируем локальные данные
     hasChanges.value = false; // Сбрасываем флаг изменений
     isEditing.value = false; // Выходим из режима редактирования
@@ -301,7 +345,7 @@ function toggleEditMode() {
 async function deleteRole() {
   if (!confirm("Вы уверены, что хотите удалить роль?")) return;
   try {
-    await axios.delete(`/api/v1/roles/${role.id}`, {
+    await axios.delete(`/api/v1/roles/${dbObject.id}`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     await router.push("/roles"); // Редирект на список пользователей
@@ -319,10 +363,10 @@ onMounted(() => {
     fetchRole();
   }
   fetchProjects();
-  fetchEntities(locations, 'locations')
-  fetchEntities(typeSubginery, 'type_subginery')
-  fetchEntities(typeEnginery, 'type_enginery')
-  fetchEntities(engineries, 'enginery')
+  fetchEntities(locationList, 'locations')
+  fetchEntities(typeSubgineryList, 'type_subginery')
+  fetchEntities(typeEngineryList, 'type_enginery')
+  fetchEntities(engineryList, 'enginery')
 });
 </script>
 <style scoped>
@@ -343,8 +387,8 @@ onMounted(() => {
   padding: 10px;
   border-bottom: 1px solid #dee2e6;
 }
+
 .add-btn {
-  //position: absolute;
   top: -10px;
   left: -10px;
   width: 35px;

@@ -22,8 +22,10 @@ class PermissionBase(BaseModelMixin):
     invalid: bool = Field(default=False)
     is_deleted: bool = Field(default=False)
 
+
 class PermissionPublic(PermissionBase):
-    id: int
+    id: int | None = None
+    role_id: int | None = None
 
 
 class Permission(PermissionBase, table=True):
