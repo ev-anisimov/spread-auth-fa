@@ -25,7 +25,7 @@
 <script setup>
 import {inject, onMounted, reactive} from "vue";
 import {useRouter} from "vue-router";
-import axios from "axios";
+import api from "@/api/axiosConfig";
 import AddButton from "@/components/Buttons/AddButton.vue";
 import {useAuthStore} from "@/stores/auth";
 import RoleRow from "@/components/Permission/RoleRow.vue";
@@ -38,12 +38,12 @@ const setBreadcrumbs = inject("setBreadcrumbs");
 
 // Функция для перехода в режим создания нового пользователя
 const goToNewRole = () => {
-  router.push({name: "usercard", params: {id: "new"}}); // Переход без данных
+  router.push({name: "rolecard", params: {id: "new"}}); // Переход без данных
 };
 
 onMounted(async () => {
   try {
-    let response = await axios.get('api/v1/roles/with_count/', {
+    let response = await api.get('/v1/roles/with_count/', {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     roleList.push(...response.data);
@@ -90,6 +90,7 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
 }
+
 
 .role-row > div {
   padding: 0 10px;

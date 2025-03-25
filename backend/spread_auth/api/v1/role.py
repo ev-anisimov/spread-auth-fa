@@ -19,7 +19,7 @@ router = APIRouter(prefix="/roles", tags=["Roles"])
 )
 async def get_roles(session: AsyncSession = Depends(get_session), filters=None, joined=None, order=None,
                     limit: Optional[int] = 20, offset: Optional[int] = 0) -> list[RolePublic]:
-    result = await get_objects(session, Role)
+    result = await get_objects(session, Role, limit=None)
     return result
 
 
@@ -62,7 +62,11 @@ async def update_role(
     dependencies=[Depends(get_current_user)],
     response_model=RolePublic
 )
-async def create_role(role: RoleBase, session: AsyncSession = Depends(get_session)) -> RolePublic:
+async def create_role(
+        role: RoleBase,
+        permissions: list[PermissionBase]=Body(...),
+        session: AsyncSession = Depends(get_session)
+) -> RolePublic:
     try:
         db_obj = Role.model_validate(role, update={'id': None})
         session.add(db_obj)
@@ -135,7 +139,7 @@ async def get_permissions_by_role(
     dependencies=[Depends(get_current_user)],
     response_model=RolePublic
 )
-async def update_role(
+async def update_role_with_permissions(
         role_id: int,
         role: RoleBase,
         permissions: list[PermissionBase]=Body(...),

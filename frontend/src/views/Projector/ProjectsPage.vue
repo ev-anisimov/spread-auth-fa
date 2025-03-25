@@ -23,7 +23,7 @@
 <script setup>
 import {inject, onMounted, reactive} from "vue";
 import { useRouter } from "vue-router";
-import axios from "axios";
+import api from "@/api/axiosConfig";
 import AddButton from "@/components/Buttons/AddButton.vue";
 import {useAuthStore} from "@/stores/auth";
 // import EditButton from "@/components/Buttons/EditButton.vue";
@@ -44,7 +44,7 @@ const goToNewProject = () => {
 
 onMounted(async () => {
   try {
-    const response = await axios.get('api/v1/projects', {
+    const response = await api.get('/v1/projects', {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     projectList.push(...response.data);

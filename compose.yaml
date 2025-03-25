@@ -11,14 +11,11 @@ services:
       - awada-sockets:/opt/awada-sockets/
       - awada-snippets:/etc/nginx/snippets/
     restart: unless-stopped
+    depends_on:
+      - postgres
 volumes:
   project:
-    name: project
   awada:
-    name: awada
   spread-conf:
-    name: spread-conf
   awada-sockets:
-    name: awada-sockets
   awada-snippets:
-    name: awada-snippets

@@ -17,7 +17,7 @@ router = APIRouter(prefix="/projects", tags=["Projects"])
 )
 async def get_projects(session: AsyncSession = Depends(get_session), filters=None, joined=None, order=None,
                        limit: Optional[int] = 20, offset: Optional[int] = 0) -> list[ProjectPublic]:
-    result = await get_objects(session, Project)
+    result = await get_objects(session, Project, limit=None)
     return result
 
 

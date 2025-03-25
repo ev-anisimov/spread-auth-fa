@@ -26,7 +26,7 @@
 import {inject, onMounted, reactive} from "vue";
 import { useRouter } from "vue-router";
 import UserRow from "@/components/Permission/UserRow.vue";
-import axios from "axios";
+import api from "@/api/axiosConfig";
 import AddButton from "@/components/Buttons/AddButton.vue";
 import {useAuthStore} from "@/stores/auth";
 // import EditButton from "@/components/Buttons/EditButton.vue";
@@ -46,7 +46,7 @@ const goToNewUser = () => {
 
 onMounted(async () => {
   try {
-    const response = await axios.get('api/v1/users', {
+    const response = await api.get('/v1/users/', {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     userList.push(...response.data);

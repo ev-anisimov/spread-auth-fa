@@ -13,47 +13,49 @@
     <div class="card-body">
       <form @submit.prevent="submitForm">
         <!-- Название -->
-        <div class="row mb-3 align-items-center" :class="{'has-error': errors.name}">
-          <label class="col-sm-1 col-form-label">Название</label>
-          <div class="col-sm-10">
-            <input
-                type="text"
-                class="form-control"
-                v-model="localObject.name"
-                :disabled="!isEditing"
-            />
-            <small v-if="errors.name" class="error-text">{{ errors.name }}</small>
+        <div class="header">
+          <div class="row mb-3 align-items-center" :class="{'has-error': errors.name}">
+            <label class="col-sm-1 col-form-label">Название</label>
+            <div class="col-sm-10">
+              <input
+                  type="text"
+                  class="form-control"
+                  v-model="localObject.name"
+                  :disabled="!isEditing"
+              />
+              <small v-if="errors.name" class="error-text">{{ errors.name }}</small>
 
+            </div>
           </div>
-        </div>
-        <!-- Вкладки проектов -->
-        <ul class="nav nav-tabs">
-          <li v-for="project in projects" :key="project.project_id" class="nav-item">
-            <a class="nav-link"
-               :class="{ active: project.project_id !== activeProjectId }"
-               href="#"
-               @click="changeProject(project.project_id)">
-              {{ project.name }} <span :class="{'badge bg-secondary': project.project_id !== activeProjectId,
+          <!-- Вкладки проектов -->
+          <ul class="nav nav-tabs">
+            <li v-for="project in projects" :key="project.project_id" class="nav-item">
+              <a class="nav-link"
+                 :class="{ active: project.project_id === activeProjectId }"
+                 href="#"
+                 @click="changeProject(project.project_id)">
+                {{ project.name }}({{ project.project_id }}) <span :class="{'badge bg-secondary': project.project_id !== activeProjectId,
                                                   'badge bg-info': project.project_id === activeProjectId}">{{
-                project.cnt
-              }}</span>
-            </a>
-          </li>
-        </ul>
+                  project.cnt
+                }}</span>
+              </a>
+            </li>
+          </ul>
 
-        <!-- Кнопка "Добавить" -->
-        <button type="button" class="btn btn-success add-btn" @click="addPermission" :disabled="!isEditing">
-          <span>+</span>
-        </button>
+          <!-- Кнопка "Добавить" -->
+          <button type="button" class="btn btn-success add-btn" @click="addPermission" :disabled="!isEditing">
+            <span>+</span>
+          </button>
 
-        <!-- Заголовки таблицы -->
-        <div class="permissions-header">
-          <div>Локация</div>
-          <div>Подсистема</div>
-          <div>Тип объекта</div>
-          <div>Инженерный объект</div>
-          <div>Доступ</div>
-          <div></div>
+          <!-- Заголовки таблицы -->
+          <div class="permissions-header">
+            <div>Локация</div>
+            <div>Подсистема</div>
+            <div>Тип объекта</div>
+            <div>Инженерный объект</div>
+            <div>Доступ</div>
+            <div></div>
+          </div>
         </div>
         <div class="role-list">
           <PermissionItem
@@ -67,6 +69,7 @@
               :is-editing="isEditing"
               :has-changes="perm.hasChanges"
               @edit="editPermission"
+              @clone="clonePermission"
               @remove="removePermission"
           />
         </div>
@@ -78,7 +81,7 @@
 <script setup>
 import {onMounted, computed, reactive, ref, watch, inject} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import axios from "axios";
+import api from "@/api/axiosConfig";
 import {useAuthStore} from "@/stores/auth";
 import EditButton from "@/components/Buttons/EditButton.vue";
 import SaveButton from "@/components/Buttons/SaveButton.vue";
@@ -150,8 +153,10 @@ const fetchPermissionsForProject = async (projectId) => {
   if (!projectId) return;
 
   try {
-    const response = await axios.get(`/api/v1/roles/${dbObject.id}/permissions?project=${projectId}`, {
-      headers: {Authorization: `Bearer ${authStore.token}`}
+    const response = await api.get(`/v1/roles/${dbObject.id}/permissions?project=${projectId}`, {
+      headers: {
+        Authorization: `Bearer ${authStore.token}`
+      }
     });
     cachedPermissions[projectId] = response.data.map(p => ({...p})); // Кешируем
     origPermissions[projectId] = response.data.map(p => ({...p})); // Кешируем
@@ -169,7 +174,7 @@ const addPermission = () => {
   cachedPermissions[activeProjectId.value].push({
     tempId: `new-${Date.now()}`,
     project: activeProjectId.value,
-    code: `${activeProjectId.value}/null/null/null/null`,
+    code: `${activeProjectId.value}/*/*/*/*`,
     access: 0,
     role_id: dbObject.id,
     id: null,
@@ -188,6 +193,16 @@ const removePermission = (perm) => {
   }
 };
 
+const clonePermission = (perm) => {
+  const projectId = perm.project;
+  if (cachedPermissions[projectId]) {
+    let clonePerm = {...cachedPermissions[projectId].find((p) => (p.id && p.id === perm.id) || (p.tempId && p.tempId === perm.tempId))};
+    clonePerm.tempId = `new-${Date.now()}`;
+    clonePerm.id = null;
+    cachedPermissions[projectId].push(clonePerm)
+    checkForChanges();
+  }
+};
 // Редактирование permission
 const editPermission = (updatedPerm) => {
   const projectId = updatedPerm.project;
@@ -198,7 +213,7 @@ const editPermission = (updatedPerm) => {
     const origPerm = origPermissions[projectId].find((p) => p.id === updatedPerm.id);
     const cachPerm = cachedPermissions[projectId][index];
     let hasChanges;
-    if ((origPerm.code === updatedPerm.code) &&
+    if (origPerm && (origPerm.code === updatedPerm.code) &&
         (origPerm.access === updatedPerm.access) &&
         (origPerm.index === updatedPerm.index)) {
       hasChanges = false;
@@ -214,9 +229,10 @@ const editPermission = (updatedPerm) => {
 };
 
 // Загрузка роли
-async function fetchRole() {
+async function fetchData() {
   try {
-    const response = await axios.get(`/api/v1/roles/${route.params.id}/`, {
+    const roleId = route.params.id;
+    const response = await api.get(`/v1/roles/${roleId}`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     Object.assign(dbObject, response.data);
@@ -234,7 +250,7 @@ async function fetchRole() {
 // Загрузка проектов
 async function fetchProjects() {
   try {
-    const response = await axios.get(`/api/v1/projects/with_count/`, {
+    const response = await api.get(`/v1/projects/with_count/`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     projects.push(...response.data);
@@ -248,16 +264,17 @@ async function fetchProjects() {
 
 async function fetchEntities(collection, type) {
   try {
-    const response = await axios.get(`/api/entity/${type}`, {
+    const response = await api.get(`/entity/${type}/`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     collection.push({
-		"obj_name": "*",
-		"obj_type": type,
-		"id": '*',
-		"parent_id": null,
-		"obj_id": "*",
-		"updated_at": "2025-02-27T13:25:50.575900"})
+      "obj_name": "*",
+      "obj_type": type,
+      "id": '*',
+      "parent_id": null,
+      "obj_id": "*",
+      "updated_at": "2025-02-27T13:25:50.575900"
+    })
     collection.push(...response.data);
   } catch (error) {
     notify(`Ошибка при получении ${error}`, "error", false);
@@ -274,7 +291,7 @@ async function saveChanges() {
     let response;
     const allPermissions = [];
     for (const projectId in cachedPermissions) {
-      allPermissions.push(...cachedPermissions[projectId].find(p => p.hasChanges === true));
+      allPermissions.push(...cachedPermissions[projectId].filter(p => p.hasChanges === true));
     }
     const payload = {
       role: {...localObject},
@@ -282,20 +299,20 @@ async function saveChanges() {
     };
 
     // if (isNew.value) {
-    //   response = await axios.post("/api/v1/roles", payload, {
+    //   response = await api.post("/api/v1/roles", payload, {
     //     headers: {Authorization: `Bearer ${authStore.token}`}
     //   });
     // } else {
-    //   response = await axios.put(`/api/v1/roles/${dbObject.id}`, payload, {
+    //   response = await api.put(`/api/v1/roles/${dbObject.id}`, payload, {
     //     headers: {Authorization: `Bearer ${authStore.token}`}
     //   });
     // }
     if (isNew.value) {
-      response = await axios.post("/api/v1/roles", payload, {
+      response = await api.post("/v1/roles/", payload, {
         headers: {Authorization: `Bearer ${authStore.token}`}
       });
     } else {
-      response = await axios.put(`/api/v1/roles/${dbObject.id}/permissions`, payload, {
+      response = await api.put(`/v1/roles/${dbObject.id}/permissions/`, payload, {
         headers: {Authorization: `Bearer ${authStore.token}`}
       });
     }
@@ -345,7 +362,7 @@ function toggleEditMode() {
 async function deleteRole() {
   if (!confirm("Вы уверены, что хотите удалить роль?")) return;
   try {
-    await axios.delete(`/api/v1/roles/${dbObject.id}`, {
+    await api.delete(`/v1/roles/${dbObject.id}/`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     await router.push("/roles"); // Редирект на список пользователей
@@ -360,7 +377,7 @@ watch(localObject, checkForChanges, {deep: true});
 // Загрузка данных при монтировании
 onMounted(() => {
   if (!isNew.value) {
-    fetchRole();
+    fetchData();
   }
   fetchProjects();
   fetchEntities(locationList, 'locations')
@@ -379,8 +396,15 @@ onMounted(() => {
   font-size: 12px;
 }
 
+.header {
+  position: sticky;
+  background-color: white;
+  top: 0;
+}
+
 .permissions-header {
   display: grid;
+  overflow-y: auto;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 100px;
   font-weight: bold;
   background-color: #f8f9fa;

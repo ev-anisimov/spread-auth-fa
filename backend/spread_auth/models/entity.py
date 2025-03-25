@@ -11,6 +11,25 @@ class EntityObjectType(Enum):
     TypeEnginery = 'type_enginery'
     Enginery = 'enginery'
 
+    @classmethod
+    def get_code_dit_for_upload(cls):
+        return {
+            cls.Location: ('locationID', int),
+            cls.TypeSubginery: ('subgineryType', str),
+            cls.TypeEnginery: ('engineryType', str),
+            cls.Enginery: ('engineryID', int),
+
+        }
+
+    @classmethod
+    def get_code_dict(cls):
+        return {
+            cls.Location.name: 1,
+            cls.TypeSubginery.name: 2,
+            cls.TypeEnginery.name: 3,
+            cls.Enginery.name: 4,
+
+        }
 
 class EntityBase(SQLModel):
     project_id: PositiveInt = Field(default=None, ge=0)

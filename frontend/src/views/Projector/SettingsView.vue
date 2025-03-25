@@ -33,7 +33,7 @@
 
 <script setup>
 import {onMounted, reactive, ref, watch, inject} from "vue";
-import axios from "axios";
+import api from "@/api/axiosConfig";
 import {useAuthStore} from "@/stores/auth";
 import SaveButton from "@/components/Buttons/SaveButton.vue";
 import ToolBar from "@/components/ToolBar.vue";
@@ -65,7 +65,7 @@ const checkForChanges = () => {
 // Загрузка данных пользователя
 async function fetchData() {
   try {
-    const response = await axios.get(`/api/options/`, {
+    const response = await api.get(`/options/`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     Object.assign(dbObject, response.data);
@@ -85,7 +85,7 @@ async function saveChanges() {
   try {
     let response
     const payload = {...localObject};
-    response = await axios.put("/api/options/", payload, {
+    response = await api.put("/options/", payload, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
 
@@ -117,7 +117,7 @@ async function saveChanges() {
 
 async function loadEntity() {
   try {
-    await axios.post("/api/entity/load/", null, {
+    await api.post("/entity/load/", null, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
 

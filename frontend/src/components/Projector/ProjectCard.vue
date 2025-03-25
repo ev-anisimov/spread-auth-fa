@@ -131,7 +131,7 @@
 <script setup>
 import {onMounted, computed, reactive, ref, watch, inject} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import axios from "axios";
+import api from "@/api/axiosConfig";
 import {useAuthStore} from "@/stores/auth";
 import EditButton from "@/components/Buttons/EditButton.vue";
 import SaveButton from "@/components/Buttons/SaveButton.vue";
@@ -185,7 +185,7 @@ const checkForChanges = () => {
 async function fetchProject() {
   const userId = route.params.id;
   try {
-    const response = await axios.get(`/api/v1/projects/${userId}`, {
+    const response = await api.get(`/api/v1/projects/${userId}`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     Object.assign(dbObject, response.data);
@@ -215,11 +215,11 @@ async function saveChanges() {
     if (!payload.password) delete payload.password;
 
     if (isNew.value) {
-      response = await axios.post("/api/v1/projects", payload, {
+      response = await api.post("/v1/projects", payload, {
         headers: {Authorization: `Bearer ${authStore.token}`}
       });
     } else {
-      response = await axios.put(`/api/v1/projects/${dbObject.id}`, payload, {
+      response = await api.put(`/v1/projects/${dbObject.id}`, payload, {
         headers: {Authorization: `Bearer ${authStore.token}`}
       });
     }
@@ -270,7 +270,7 @@ function toggleEditMode() {
 async function deleteUser() {
   if (!confirm("Вы уверены, что хотите удалить пользователя?")) return;
   try {
-    await axios.delete(`/api/v1/users/${dbObject.id}`, {
+    await api.delete(`/v1/users/${dbObject.id}`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     await router.push("/users"); // Редирект на список пользователей

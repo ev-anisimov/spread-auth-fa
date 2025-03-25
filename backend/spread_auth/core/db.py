@@ -77,7 +77,7 @@ async def update_object(session: AsyncSession, model_object: SQLModel, obj_id: i
 
 async def bulk_create(session: AsyncSession, model_object: SQLModel, objects_data: list[SQLModel], returning=None):
     try:
-        _ins = insert(model_object).values([obj.model_dump(exclude_unset=True) for obj in objects_data])
+        _ins = insert(model_object).values([obj.model_dump(exclude={"id"}, exclude_unset=True) for obj in objects_data])
         if returning:
             _ins = _ins.returning(model_object)
         res = await session.exec(_ins)
@@ -102,8 +102,11 @@ async def bulk_update(session: AsyncSession, model_object: SQLModel, objects_dat
         logger.exception(ex)
 
 
-async def bulk_create_or_update(session: AsyncSession, model_object: SQLModel, objects_data: list[SQLModel]) -> list[
-                                                                                                                    SQLModel] | None:
+async def bulk_create_or_update(
+        session: AsyncSession,
+        model_object: SQLModel,
+        objects_data: list[SQLModel]
+) -> list[SQLModel] | None:
     _to_update, _to_create = [], []
     for obj_data in objects_data:
         if obj_data.id:
@@ -116,7 +119,7 @@ async def bulk_create_or_update(session: AsyncSession, model_object: SQLModel, o
         inserted_rs = await bulk_create(session, model_object, _to_create, returning=True)
     if _to_update:
         updated_rs = await bulk_update(session, model_object, _to_update, returning=True)
-    return list(set(inserted_rs + updated_rs))
+    return list(inserted_rs + updated_rs)
 
 
 async def get_objects(session: AsyncSession, model_object: SQLModel, filters: Optional[list] = None, joined=None,
@@ -126,7 +129,8 @@ async def get_objects(session: AsyncSession, model_object: SQLModel, filters: Op
 
     query = select(model_object)
     if joined:
-        query = query.join(*joined).options(selectinload(*joined))
+        query = query.join(*joined)
+        # query = query.join(*joined).options(selectinload(*joined))
     query = query.where(*filters)
     query = query.limit(limit).offset(offset).order_by(*order)
     res = await session.exec(query)

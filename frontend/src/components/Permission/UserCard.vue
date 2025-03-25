@@ -1,14 +1,14 @@
 <template>
   <div class="card">
 
-      <ToolBar>
-        <template #buttons>
-          <EditButton v-if="!isEditing" @click-handler="toggleEditMode"/>
-          <SaveButton v-if="isEditing" @click-handler="saveChanges" :has-changes="hasChanges"
-                      :is-new="isNew"/>
-          <DeleteButton @click="deleteUser"/>
-        </template>
-      </ToolBar>
+    <ToolBar>
+      <template #buttons>
+        <EditButton v-if="!isEditing" @click-handler="toggleEditMode"/>
+        <SaveButton v-if="isEditing" @click-handler="saveChanges" :has-changes="hasChanges"
+                    :is-new="isNew"/>
+        <DeleteButton @click="deleteUser"/>
+      </template>
+    </ToolBar>
 
     <div class="card-body">
       <form @submit.prevent="submitForm">
@@ -79,6 +79,27 @@
             />
           </div>
         </div>
+ <!-- Два списка ролей с кнопками -->
+        <div class="roles-container">
+          <div>
+            <h5>Все роли</h5>
+            <select multiple v-model="selectedAvailableRoles" class="form-select" :disabled="!isEditing">
+              <option v-for="role in availableRoles" :key="role.id" :value="role.id">{{ role.name }}</option>
+            </select>
+          </div>
+
+          <div class="roles-actions">
+            <button type="button" class="btn btn-outline-secondary" @click="assignRoles" :disabled="!selectedAvailableRoles.length">+</button>
+            <button type="button" class="btn btn-outline-secondary" @click="removeRoles" :disabled="!selectedUserRoles.length">-</button>
+          </div>
+
+          <div>
+            <h5>Роли пользователя</h5>
+            <select multiple v-model="selectedUserRoles" class="form-select" :disabled="!isEditing">
+              <option v-for="role in userRoles" :key="role.id" :value="role.id">{{ role.name }}</option>
+            </select>
+          </div>
+        </div>
       </form>
     </div>
   </div>
@@ -87,7 +108,7 @@
 <script setup>
 import {onMounted, computed, reactive, ref, watch, inject} from "vue";
 import {useRoute, useRouter} from "vue-router";
-import axios from "axios";
+import api from "@/api/axiosConfig";
 import {useAuthStore} from "@/stores/auth";
 import EditButton from "@/components/Buttons/EditButton.vue";
 import SaveButton from "@/components/Buttons/SaveButton.vue";
@@ -114,21 +135,20 @@ const dbObject = reactive({
   last_name: "",
   is_service: false,
   is_staff: false,
-  password: ""
+  password: "",
+  roles: [] // роли пользователя
 });
 
 // Локальная копия данных для редактирования
-const localObject = reactive({
-  id: null,
-  updated_at: null,
-  username: "",
-  name: "",
-  first_name: "",
-  last_name: "",
-  is_service: false,
-  is_staff: false,
-  password: ""
-});
+const localObject = reactive({...dbObject});
+
+const userRoles = computed(() => localObject.roles);
+const allRoles = ref([]); // Все роли (для выбора)
+const availableRoles = computed(() => allRoles.value.filter(role => !userRoles.value.find(r => r.id === role.id))); // Оставшиеся роли
+
+// Для хранения выбранных ролей
+const selectedAvailableRoles = ref([]);
+const selectedUserRoles = ref([]);
 
 const errors = ref({}); // Ошибки валидации
 
@@ -141,7 +161,7 @@ const checkForChanges = () => {
 async function fetchData() {
   const userId = route.params.id;
   try {
-    const response = await axios.get(`/api/v1/users/${userId}`, {
+    const response = await api.get(`/v1/users/${userId}`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     Object.assign(dbObject, response.data);
@@ -150,10 +170,55 @@ async function fetchData() {
       {label: "Пользователи", url: "/users"},
       {label: dbObject.name, url: `/users/${dbObject.id}`},
     ]);
+
+
+    await fetchUserRoles(userId);
+    await fetchAllRoles();
+
   } catch (error) {
     notify(`Ошибка при получении данных пользователя ${error}`, "error", false);
   }
 }
+
+async function fetchUserRoles(userId) {
+  try {
+    const response = await api.get(`/v1/users/${userId}/roles/`, {
+      headers: {Authorization: `Bearer ${authStore.token}`}
+    });
+    localObject.roles = response.data;
+  } catch (error) {
+    notify(`Ошибка при загрузке ролей пользователя: ${error}`, "error");
+  }
+}
+
+// ✅ **Загружаем все роли (для выбора)**
+async function fetchAllRoles() {
+  try {
+    const response = await api.get(`/v1/roles/`, {
+      headers: {Authorization: `Bearer ${authStore.token}`}
+    });
+    allRoles.value = response.data;
+  } catch (error) {
+    notify(`Ошибка при загрузке всех ролей: ${error}`, "error");
+  }
+}
+
+// Добавить выбранные роли к пользователю
+const assignRoles = () => {
+  selectedAvailableRoles.value.forEach(roleId => {
+    const roleToAdd = allRoles.value.find(role => role.id === roleId);
+    if (roleToAdd) localObject.roles.push(roleToAdd);
+  });
+  selectedAvailableRoles.value = [];
+  checkForChanges();
+};
+
+// Удалить выбранные роли у пользователя
+const removeRoles = () => {
+  localObject.roles = localObject.roles.filter(role => !selectedUserRoles.value.includes(role.id));
+  selectedUserRoles.value = [];
+  checkForChanges();
+};
 
 // Сохранение изменений
 async function saveChanges() {
@@ -163,15 +228,15 @@ async function saveChanges() {
   }
   try {
     let response
-    const payload = {...localObject};
+    const payload = {...localObject, roles: userRoles.value.map((r) => r.id)};
     if (!payload.password) delete payload.password;
 
     if (isNew.value) {
-      response = await axios.post("/api/v1/users", payload, {
+      response = await api.post("/v1/users", payload, {
         headers: {Authorization: `Bearer ${authStore.token}`}
       });
     } else {
-      response = await axios.put(`/api/v1/users/${dbObject.id}`, payload, {
+      response = await api.put(`/v1/users/${dbObject.id}`, payload, {
         headers: {Authorization: `Bearer ${authStore.token}`}
       });
     }
@@ -221,7 +286,7 @@ function toggleEditMode() {
 async function deleteUser() {
   if (!confirm("Вы уверены, что хотите удалить пользователя?")) return;
   try {
-    await axios.delete(`/api/v1/users/${dbObject.id}`, {
+    await api.delete(`/v1/users/${dbObject.id}`, {
       headers: {Authorization: `Bearer ${authStore.token}`}
     });
     await router.push("/users"); // Редирект на список пользователей
@@ -249,5 +314,40 @@ onMounted(() => {
 .error-text {
   color: #dc3545;
   font-size: 12px;
+}
+
+<
+style scoped >
+.roles-header {
+  display: grid;
+  grid-template-columns: 2fr 3fr 50px;
+  font-weight: bold;
+  background-color: #f8f9fa;
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.role-list {
+  display: grid;
+}
+
+.role-item {
+  display: grid;
+  grid-template-columns: 2fr 3fr 50px;
+  padding: 10px;
+  border-bottom: 1px solid #dee2e6;
+  align-items: center;
+}
+
+.add-btn {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 </style>

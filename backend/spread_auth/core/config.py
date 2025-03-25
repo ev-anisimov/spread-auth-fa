@@ -81,6 +81,7 @@ class Settings(BaseSettings):
         env_ignore_empty=True,
         extra="ignore",
     )
+    STATIC_DIR:str = "/static/"
     V1_STR: str = "/v1"
 
     # openssl rand -hex 32

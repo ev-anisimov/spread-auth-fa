@@ -1,5 +1,5 @@
 import json
-from typing import List
+from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException
 from fastapi.responses import JSONResponse
@@ -51,12 +51,13 @@ async def load_entity(
     dependencies=[Depends(get_current_user)],
     response_model=list[Entity])
 async def get_locations(
+        project: Optional[int] = None,
         current_user: User = Depends(get_current_user),
         session: AsyncSession = Depends(get_session)
 )->list[Entity]:
     try:
         _filters=[Entity.obj_type==EntityObjectType.Location]
-        result = await get_objects(session, Entity, _filters)
+        result = await get_objects(session, Entity, _filters, limit=None)
         return result
     except Exception as ex:
         print(ex)
@@ -65,12 +66,13 @@ async def get_locations(
     dependencies=[Depends(get_current_user)],
     response_model=list[Entity])
 async def get_type_subginery(
+        project: Optional[int] = None,
         current_user: User = Depends(get_current_user),
         session: AsyncSession = Depends(get_session)
 )->list[Entity]:
     try:
         _filters = [Entity.obj_type == EntityObjectType.TypeSubginery]
-        result = await get_objects(session, Entity, _filters)
+        result = await get_objects(session, Entity, _filters, limit=None)
         return result
     except Exception as ex:
         print(ex)
@@ -80,12 +82,13 @@ async def get_type_subginery(
     dependencies=[Depends(get_current_user)],
     response_model=list[Entity])
 async def get_type_enginery(
+        project: Optional[int] = None,
         current_user: User = Depends(get_current_user),
         session: AsyncSession = Depends(get_session)
 )->list[Entity]:
     try:
         _filters = [Entity.obj_type == EntityObjectType.TypeEnginery]
-        result = await get_objects(session, Entity, _filters)
+        result = await get_objects(session, Entity, _filters,limit=None)
         return result
     except Exception as ex:
         print(ex)
@@ -95,12 +98,13 @@ async def get_type_enginery(
     dependencies=[Depends(get_current_user)],
     response_model=list[Entity])
 async def get_enginery(
+        project: Optional[int] = None,
         current_user: User = Depends(get_current_user),
         session: AsyncSession = Depends(get_session)
 )->list[Entity]:
     try:
         _filters = [Entity.obj_type == EntityObjectType.Enginery]
-        result = await get_objects(session, Entity, _filters)
+        result = await get_objects(session, Entity, _filters, limit=None)
         return result
     except Exception as ex:
         print(ex)

@@ -1,3 +1,5 @@
+from typing import Optional
+
 from sqlmodel import Field, Relationship, SQLModel
 
 from pydantic import computed_field
@@ -24,6 +26,7 @@ class UserCreate(UserBase):
 
 class UserPublic(UserBase):
     id: int
+    roles: Optional[list[int]] = None
 
 
 class UsersPublic(SQLModel):

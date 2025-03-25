@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
-import axios from "axios";
+import api from "@/api/axiosConfig";
+// import axios from "axios";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -17,7 +18,7 @@ export const useAuthStore = defineStore("auth", {
         let data = new FormData()
         data.append('username',username)
         data.append('password',password)
-        const response = await axios.post("/api/login", data, { headers: { 'content-type': 'application/x-www-form-urlencoded' } } );
+        const response = await api.post("/login", data, { headers: { 'content-type': 'application/x-www-form-urlencoded' } } );
         this.token = response.data.access_token;
         localStorage.setItem("token", this.token);
 
@@ -32,7 +33,7 @@ export const useAuthStore = defineStore("auth", {
       if (!this.token) return;
 
       try {
-        const response = await axios.get("/api/user", {
+        const response = await api.get("/user", {
           headers: { Authorization: `Bearer ${this.token}` },
         });
         this.user = response.data;
